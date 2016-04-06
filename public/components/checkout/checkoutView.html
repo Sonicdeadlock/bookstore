@@ -1,0 +1,113 @@
+<div class="col-md-10 col-md-offset-1" ng-hide="receipt">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">Shipping Information</div>
+            <div class="panel-body">
+                <form class="form-horizontal container">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input class="form-control" ng-model="shippingInformation.first_name">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input class="form-control" ng-model="shippingInformation.last_name">
+                    </div>
+                    <div class="form-group">
+                        <label>State</label>
+                        <input class="form-control" ng-model="shippingInformation.state">
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input class="form-control" ng-model="shippingInformation.city">
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input class="form-control" ng-model="shippingInformation.address">
+                    </div>
+                    <div class="form-group">
+                        <label>Zip Code</label>
+                        <input class="form-control" ng-model="shippingInformation.zip">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Billing Information</div>
+            <div class="panel-body">
+                <div ng-show="showCheckoutStyles"><!-- Choose payment style section-->
+                    <div class="jumbotron col-md-5 col-md-offset-1" ng-click="setCheckoutStyle('Paypal')">
+                        <h2>Paypal</h2>
+                    </div>
+                    <div class="jumbotron col-md-5 col-md-offset-1" ng-click="setCheckoutStyle('CreditCard')">
+                        <h2>Credit Card</h2>
+                    </div>
+                </div>
+                <div ng-show="checkoutStyle == 'Paypal'">
+                    <h2>If a Paypal window doesn't come up in 10 seconds <a ng-click="checkout()">click here</a>
+                        <small>This is just a place holder, click the continue button to proceed</small>
+                    </h2>
+                </div>
+                <div ng-show="checkoutStyle == 'CreditCard'">
+                    <form class="form-horizontal container">
+                        <button ng-click="cloneFromShipping()" class="btn btn-success">Copy From Shipping Information
+                        </button>
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input class="form-control" ng-model="billingInformation.first_name">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input class="form-control" ng-model="billingInformation.last_name">
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input class="form-control" ng-model="billingInformation.state">
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <input class="form-control" ng-model="billingInformation.city">
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input class="form-control" ng-model="billingInformation.address">
+                        </div>
+                        <div class="form-group">
+                            <label>Zip Code</label>
+                            <input class="form-control" ng-model="billingInformation.zip">
+                        </div>
+                        <div class="form-group">
+                            <label>Credit Card Number</label>
+                            <input class="form-control" ng-model="billingInformation.credit_card_number" type="number">
+                        </div>
+                        <div class="form-group">
+                            <label>CVC</label>
+                            <input class="form-control" ng-model="billingInformation.cvc" type="number">
+                        </div>
+                        <div class="form-group form-inline">
+                            <label>Expiration Date (MM/YY): </label>
+                            <input class="form-control" ng-model="billingInformation.expiration_month" type="number">
+                            <span>/</span>
+                            <input class="form-control" ng-model="billingInformation.expiration_year" type="number">
+                        </div>
+                        <button class="btn btn-primary" ng-click="checkout();">Checkout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="col-md-10 col-md-offset-1" ng-show="receipt">
+    <h4>Items</h4>
+    <ul>
+        <li ng-repeat="item in receipt.items">{{item.title}} {{item.type}} x {{item.quantity}} = {{item.totalPrice}}
+        </li>
+    </ul>
+    <p><b>Total:</b> {{receipt.total}}</p>
+    <p><b>Payment Type:</b> {{receipt.payment.paymentMethod}}</p>
+    <h4>Shipping</h4>
+    <p>{{receipt.shipping.first_name}} {{receipt.shipping.last_name}}</p>
+    <p>{{receipt.shipping.address}}</p>
+    <p>{{receipt.shipping.city}} {{receipt.shipping.state}} {{receipt.shipping.zip}}</p>
+</div>

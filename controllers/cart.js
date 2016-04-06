@@ -89,18 +89,22 @@ function checkout(req, res) {
             switch (item.purchaseType) {
                 case 'RENT':
                     datastore.increment(item.ISBN, item.quantity * -1, 'quantityRental');
+                    item.type = 'Rental';
                     total += item.totalPrice;
                     break;
                 case "NEW":
                     datastore.increment(item.ISBN, item.quantity * -1, 'quantityNew');
+                    item.type = 'New';
                     total += item.totalPrice;
                     break;
                 case "USED":
                     datastore.increment(item.ISBN, item.quantity * -1, 'quantityUsed');
+                    item.type = 'Used';
                     total += item.totalPrice;
                     break;
                 case "EBOOK":
                     total += item.totalPrice;
+                    item.type = 'EBook';
                     break;
             }
         });
@@ -108,11 +112,13 @@ function checkout(req, res) {
             items: _.cloneDeep(cart),
             total: total,
             id: uid(),
-            payment: req.body
+            payment: req.body.billingInformation,
+            shipping: req.body.shippingInformation
         };
+        req.session.cart = [];
         //todo:store receipt
         res.json(receipt);
-        req.session.cart = [];
+
     }
 }
 

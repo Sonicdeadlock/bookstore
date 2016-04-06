@@ -103,7 +103,7 @@ module.exports = {
     },
     save: function () {
         var lines = [];
-        var keys = bookData[0];
+        var keys = _.keys(bookData[0]);
         lines.push(keys.join(config.datastore.seperator));
         _.map(bookData, function (bookDatum) {
             return _.at(bookDatum, keys).join(config.datastore.seperator);

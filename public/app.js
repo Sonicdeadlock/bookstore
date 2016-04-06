@@ -86,6 +86,18 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 controller: "cartController"
             }
         }
+    }).state('checkout', {
+        url: '/checkout',
+        views: {
+            navbar: {
+                templateUrl: "components/navbar/navbarView.html",
+                controller: "navbarController"
+            },
+            content: {
+                templateUrl: "components/checkout/checkoutView.html",
+                controller: "checkoutController"
+            }
+        }
     })
 
 
