@@ -26,6 +26,34 @@ function getAll(req, res) {
 }
 
 function getByKeyword(req, res) {
+    var words = req.params.keywords.split(' ');
+    var course_sections = [];
+    var books = [];
+    words.forEach(function (word) {
+        function addToCourseSections(book) {
+            course_sections.push(book);
+        }
+
+        function addTobooks(book) {
+            books.push(book);
+        }
+
+        datastore.searchCourseFuzzy(word).forEach(addToCourseSections);
+        datastore.searchProfessorFuzzy(word).forEach(addToCourseSections);
+        datastore.searchCRN(word).forEach(addToCourseSections);
+        datastore.searchAuthorFuzzy(word).forEach(addTobooks);
+        datastore.searchTitleFuzzy(word).forEach(addTobooks);
+        if (datastore.searchISBN(word))
+            addTobooks(datastore.searchISBN(word));
+
+    });
+    course_sections = _.uniq(course_sections);
+    course_sections = datastore.courseFormat(course_sections);
+    books = _.uniqBy(books, 'ISBN');
+
+    res.json({course_sections: course_sections, books: books});
+
+
     //TODO Keyword search
 }
 
