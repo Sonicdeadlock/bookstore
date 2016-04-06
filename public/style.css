@@ -1,0 +1,33 @@
+.book-list {
+    height: 300px;
+    border: 1px solid #5e5e5e;
+    overflow-x: hidden;
+    overflow-y: auto;
+    list-style-type: none;
+}
+
+.book-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.book-list li.selected {
+    background-color: rgba(42, 158, 197, 1);
+}
+
+.icon-image {
+    max-height: 100px;
+}
+
+.book-image {
+    max-height: 210px;
+}
+
+img.icon-image.small {
+    max-height: 50px;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+}
+

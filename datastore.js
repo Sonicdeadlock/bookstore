@@ -9,6 +9,9 @@ var bookData = [];
 
 fs.readFile(config.datastore.path, 'utf8', function (err, data) {
     var lines = data.split('\n');
+    lines = _.map(lines, function (line) {
+        return _.trim(line, '\r')
+    });
     var tokens = lines[0].split(config.datastore.seperator);
     _.slice(lines, 1).forEach(function (line) {
         var columns = line.split(config.datastore.seperator);
@@ -92,7 +95,7 @@ module.exports = {
             .value();
     },
     courseFormat: function (dataSet) {
-        _.chain(dataSet)
+        return _.chain(dataSet)
             .groupBy('CRN')
             .values()
             .map(_.uniq)

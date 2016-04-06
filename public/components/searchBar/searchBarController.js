@@ -50,7 +50,6 @@ angular.module('controllers').controller('searchBarController', function ($scope
                 break;
 
         }
-        console.log($scope.typeaheadList)
 
     }
 });

@@ -42,7 +42,23 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                     controller: "homeController"
                 }
             }
-        })
+        }).state('search', {
+        url: "/search?searchType&searchString",
+        views: {
+            navbar: {
+                templateUrl: "components/navbar/navbarView.html",
+                controller: "navbarController"
+            },
+            searchBar: {
+                templateUrl: "components/searchBar/searchBarView.html",
+                controller: "searchBarController"
+            },
+            content: {
+                templateUrl: "components/search/searchView.html",
+                controller: "searchController"
+            }
+        }
+    })
 
 
 }]);

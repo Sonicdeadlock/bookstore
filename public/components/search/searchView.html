@@ -1,0 +1,29 @@
+<div class="col-md-offset-1 col-md-10">
+    <div class="container">
+        <h2>Books</h2>
+        <h3 ng-show="books.length==0">0 Results</h3>
+        <book ng-repeat="book in books" class="row"></book>
+    </div>
+    <br>
+    <div class="panel-group">
+        <h2>Courses</h2>
+        <h3 ng-show=" course_sections.length==0">0 Results</h3>
+        <div ng-repeat="course_section in course_sections" class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">{{course_section.course}} - Section {{course_section.section}} CRN
+                    {{course_section.CRN}}</h4>
+            </div>
+            <div class="panel-body">
+                <h3 ng-show="course_section.required.length" class="col-md-12">Required Books
+                    <small><a ng-click="addAll(course_section)">Add All</a></small>
+                </h3>
+                <br class="row">
+                <book ng-repeat="book in course_section.required"></book>
+                <br class="row">
+                <h3 ng-show="course_section.recommended.length" class="col-md-12">Recommended Books</h3><br class="row">
+                <book ng-repeat="book in course_section.recommended"></book>
+            </div>
+        </div>
+    </div>
+    <h2 ng-show="books.length==0 && course_sections.length==0">0 Results</h2>
+</div>

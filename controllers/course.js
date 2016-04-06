@@ -17,7 +17,7 @@ function getById(req, res) {
 
 function get_books(req, res) {
     var course = req.params.course;
-    res.json(datastore.courseFormat(datastore.getCourses(course)));
+    res.json(datastore.courseFormat(datastore.searchCourse(course)));
 }
 
 module.exports.get_books = get_books;
