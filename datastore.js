@@ -113,7 +113,7 @@ module.exports = {
         fs.writeFile('books.tsv', lines.join('\n'));
     },
     increment: function (ISBN, amount, field) {
-        this.searchISBN(ISBN)[field] += amount;
+        this.searchISBN(ISBN)[field] = Number(this.searchISBN(ISBN)[field]) + amount;
         this.save();
     },
     bookData: bookData
