@@ -9,10 +9,7 @@ var fs = require('fs');
 function add(req, res) {
     var cart = req.session.cart || [];
     req.body.id = uid();
-    if (req.body.quantity < 0) {
-        res.status(403).send('invalid quantity');
-        return;
-    }
+    req.body.quantity = req.body.quantity || 1;
     switch (req.body.purchaseType) {
         case 'RENT':
             req.body.totalPrice = datastore.searchISBN(req.body.ISBN).priceRental * req.body.quantity;
@@ -32,8 +29,15 @@ function add(req, res) {
     res.status(200).send();
 }
 
-function remove(id) {
-    req.session.cart = _.reject(req.session.cart, {id: id});
+function update(req, res) {
+    var index = _.findIndex(req.session.cart, {id: req.body.id});
+    if (index != -1) {
+        req.session.cart[index] = req.body;
+        res.status(200).send();
+    }
+    else {
+        res.status(404).send();
+    }
 }
 
 function count(req, res) {
@@ -113,12 +117,11 @@ function checkout(req, res) {
 }
 
 module.exports.add = add;
-module.exports.remove = remove;
 module.exports.remove_request = function (req, res) {
-    remove(req.params.item_id).then(function () {
+    req.session.cart = _.reject(req.session.cart, {id: req.params.item_id});
         res.status(200).send();
-    })
 };
 module.exports.count = count;
 module.exports.get = get;
 module.exports.checkout = checkout;
+module.exports.update = update;

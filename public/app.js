@@ -74,6 +74,18 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 controller: "bookController"
             }
         }
+    }).state('cart', {
+        url: '/cart',
+        views: {
+            navbar: {
+                templateUrl: "components/navbar/navbarView.html",
+                controller: "navbarController"
+            },
+            content: {
+                templateUrl: "components/cart/cartView.html",
+                controller: "cartController"
+            }
+        }
     })
 
 
