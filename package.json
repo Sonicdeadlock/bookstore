@@ -19,5 +19,22 @@
   "bugs": {
     "url": "https://github.com/Sonicdeadlock/bookstore/issues"
   },
-  "homepage": "https://github.com/Sonicdeadlock/bookstore"
+  "homepage": "https://github.com/Sonicdeadlock/bookstore",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "lodash": "^4.8.2"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-nodeunit": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-simple-mocha": "^0.4.1",
+    "mocha": "^2.4.5",
+    "should": "^8.3.0",
+    "supertest": "^1.2.0",
+    "supertest-session": "^2.0.1"
+  }
 }
