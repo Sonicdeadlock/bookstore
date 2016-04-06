@@ -11,7 +11,7 @@ var server = require('http').createServer(app);
 //Web Routes
 var web = require('./routes/index');
 var api = require('./routes/api');
-
+var auth = require('./routes/auth');
 
 //Configure Express
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
@@ -28,6 +28,7 @@ app.use(session({
 //Register routes
 app.use('/', web);
 app.use('/api', api);
+app.use('/auth', auth);
 
 
 //On Error

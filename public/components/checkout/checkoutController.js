@@ -5,6 +5,9 @@ angular.module('controllers').controller('checkoutController', function ($scope,
     $scope.showCheckoutStyles = true;
     $scope.billingInformation = {};
     $scope.shippingInformation = {};
+    if ($rootScope.logged_in_user && $rootScope.logged_in_user.shippingInformation) {
+        $scope.shippingInformation = $rootScope.logged_in_user.shippingInformation;
+    }
     $scope.setCheckoutStyle = function (style) {
         $scope.checkoutStyle = style;
         $scope.showCheckoutStyles = false;

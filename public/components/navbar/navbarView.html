@@ -16,6 +16,10 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a ui-sref="cart">Cart <span class="badge">{{cart_count}}</span></a></li>
+                <li class="" ng-if="!logged_in_user"><a title="Login"
+                                                        data-template-url="/components/navbar/loginDirective.html"
+                                                        data-placement="bottom" data-animation="am-flip-x"
+                                                        data-container='body' bs-popover>Login</a></li>
             </ul>
         </div>
     </div>
