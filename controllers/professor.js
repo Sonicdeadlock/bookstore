@@ -17,7 +17,6 @@ function get_books(req, res) {
 
 module.exports.get_books = get_books;
 module.exports.get = get;
-module.exports.getById = getById;
 
 
 
