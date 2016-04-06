@@ -22,7 +22,7 @@ fs.readFile(config.datastore.path, 'utf8', function (err, data) {
 
 module.exports = {
     searchISBN: function (ISBN) {
-        return _.filter(bookData, {ISBN: ISBN});
+        return _.head(_.filter(bookData, {ISBN: ISBN}));
     },
     searchTitleFuzzy: function (titlePart) {
         return _.filter(bookData, function (book) {
@@ -67,6 +67,12 @@ module.exports = {
             .uniq()
             .value();
     },
+    getProfessors: function () {
+        return _.chain(bookData)
+            .map('professor')
+            .uniq()
+            .value();
+    },
     getCourseSections: function () {
         return _.chain(bookData)
             .map(function (bookDatum) {
@@ -91,6 +97,22 @@ module.exports = {
             .values()
             .map(_.uniq)
             .value();
-    }
+    },
+    save: function () {
+        var lines = [];
+        var keys = bookData[0];
+        lines.push(keys.join(config.datastore.seperator));
+        _.map(bookData, function (bookDatum) {
+            return _.at(bookDatum, keys).join(config.datastore.seperator);
+        }).forEach(function (line) {
+            lines.push(line);
+        });
+        fs.writeFile('books.tsv', lines.join('\n'));
+    },
+    increment: function (ISBN, amount, field) {
+        this.searchISBN(ISBN)[field] += amount;
+        this.save();
+    },
+    bookData: bookData
 };
 

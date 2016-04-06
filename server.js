@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 var app = express();
 var session = require('express-session');
 var server = require('http').createServer(app);
-require('./datastore');
 //Web Routes
 var web = require('./routes/index');
 var api = require('./routes/api');
