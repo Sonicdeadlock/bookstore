@@ -31,3 +31,8 @@ img.icon-image.small {
     text-decoration: line-through;
 }
 
+.purchase-option {
+    height: 164px;
+    margin: 5px;
+
+}

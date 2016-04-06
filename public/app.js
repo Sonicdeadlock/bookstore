@@ -58,6 +58,22 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 controller: "searchController"
             }
         }
+    }).state('book', {
+        url: "/book/:bookId",
+        views: {
+            navbar: {
+                templateUrl: "components/navbar/navbarView.html",
+                controller: "navbarController"
+            },
+            searchBar: {
+                templateUrl: "components/searchBar/searchBarView.html",
+                controller: "searchBarController"
+            },
+            content: {
+                templateUrl: "components/book/bookView.html",
+                controller: "bookController"
+            }
+        }
     })
 
 
