@@ -1,0 +1,24 @@
+{
+  "name": "bookstore",
+  "description": "KSU Bookstore",
+  "main": "server.js",
+  "authors": [
+    "Alex Thomas"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "bookstore"
+  ],
+  "homepage": "https://github.com/Sonicdeadlock/bookstore",
+  "moduleType": [
+    "es6",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

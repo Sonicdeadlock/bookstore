@@ -1,0 +1,23 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "KSU Bookstore",
+  "main": "server.js",
+  "scripts": {
+    "install": "bower install",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sonicdeadlock/bookstore.git"
+  },
+  "keywords": [
+    "bookstore"
+  ],
+  "author": "Alex Thomas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sonicdeadlock/bookstore/issues"
+  },
+  "homepage": "https://github.com/Sonicdeadlock/bookstore"
+}
