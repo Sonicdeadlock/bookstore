@@ -8,7 +8,8 @@ module.exports = {
         port: process.env.port || 8080
     },
     datastore: {
-        path: ''
+        path: 'books.tsv',
+        seperator: '\t'
     },
     session: {
         secret: 'I know what you did last summer',
