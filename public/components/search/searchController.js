@@ -70,8 +70,9 @@ angular.module('controllers').controller('searchController', function ($scope, $
             break;
     }
 
-    $scope.add = function (book_id, order_type) {
-        $http.post('/api/cart/add', {ITEM_BOOK_ID: book_id, PURCHASE_TYPE: order_type}).success(function () {
+    $scope.add = function (book, order_type) {
+        book.purchaseType = order_type;
+        $http.post('/api/cart/add', book).success(function () {
             $http.get('/api/cart/count').success(function (data) {
                 $rootScope.cart_count = data;
             })
@@ -79,11 +80,11 @@ angular.module('controllers').controller('searchController', function ($scope, $
     };
 
     $scope.addAll = function (course_section) {
-        course_section.required_books.forEach(function (book) {
-            $scope.add(book.BOOK_ID, 'NEW')
+        course_section.required.forEach(function (book) {
+            $scope.add(book, 'NEW')
         });
-        course_section.recommended_books.forEach(function (book) {
-            $scope.add(book.BOOK_ID, 'NEW')
+        course_section.recommended.forEach(function (book) {
+            $scope.add(book, 'NEW')
         });
     };
 });

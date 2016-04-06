@@ -29,6 +29,7 @@ function add(req, res) {
     }
     cart.push(req.body);
     req.session.cart = cart;
+    res.status(200).send();
 }
 
 function remove(id) {
