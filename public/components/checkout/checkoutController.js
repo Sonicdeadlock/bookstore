@@ -8,6 +8,9 @@ angular.module('controllers').controller('checkoutController', function ($scope,
     if ($rootScope.logged_in_user && $rootScope.logged_in_user.shippingInformation) {
         $scope.shippingInformation = $rootScope.logged_in_user.shippingInformation;
     }
+    $rootScope.$watch('logged_in_user', function () {
+        $scope.shippingInformation = $rootScope.logged_in_user.shippingInformation;
+    });
     $scope.setCheckoutStyle = function (style) {
         $scope.checkoutStyle = style;
         $scope.showCheckoutStyles = false;
