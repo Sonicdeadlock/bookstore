@@ -3,7 +3,6 @@
 ### Dependencies ###
 - Nodejs (at least 0.12.x)
 - bower `npm install bower -g`
-- grunt-cli `npm install grunt-cli -g`
 
 ### Getting Started ###
 1. Clone the repository
