@@ -36,3 +36,11 @@ img.icon-image.small {
     margin: 5px;
 
 }
+
+.option-list {
+    list-style: none;
+}
+
+.dropdown {
+    display: inline-block;
+}

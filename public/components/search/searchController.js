@@ -6,6 +6,30 @@ angular.module('controllers').controller('searchController', function ($scope, $
     var searchString = $rootScope.$stateParams.searchString;
     $scope.books = [];
     $scope.course_sections = [];
+    $scope.showRecommended = true;
+    $scope.showRequired = true;
+    $scope.searchType = searchType;
+    $scope.sortPredicate = 'title';
+    $scope.sortReverse = false;
+    $scope.sortPrice = false;
+    $scope.priceTypes = [
+        {key: 'priceNew', text: 'New Book'},
+        {key: 'priceUsed', text: 'Used Book'},
+        {key: 'priceRental', text: 'Rental Book'},
+        {key: 'priceEBook', text: 'EBook Book'}
+    ];
+
+    $scope.sortBooks = function (sort) {
+        if (sort === 'price') {
+            $scope.sortPredicate = 'priceNew';
+            $scope.sortPrice = true;
+        }
+        else {
+            $scope.sortPredicate = sort;
+            $scope.sortPrice = false;
+            $scope.sortReverse = false;
+        }
+    };
     switch (searchType) {
         case 'Title':
             $http.get('/api/books/title/' + searchString)

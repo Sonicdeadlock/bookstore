@@ -1,11 +1,43 @@
-<div class="col-md-offset-1 col-md-10">
-    <div class="container">
+<div class="col-md-2 hidden-sm hidden-xs">
+    <h3>Sort By</h3>
+    <ul class="option-list">
+        <li><a ng-click="sortBooks('title')">Title</a></li>
+        <li><a ng-click="sortBooks('author')">Author</a></li>
+        <li><a ng-click="sortBooks('price')">Price</a></li>
+    </ul>
+    <hr>
+    <div ng-show="searchType==='Professor' || searchType ==='Course' || searchType === 'Keyword'">
+        <h3>Show</h3>
+        <ul class="option-list">
+            <li>Required Books <input type="checkbox" ng-model="showRequired"></li>
+            <li>Recommended Books <input type="checkbox" ng-model="showRecommended"></li>
+        </ul>
+    </div>
+
+</div>
+<div class="col-md-9 col-sm-9 clearfix">
+    <div class="row" ng-show="sortPrice">
+        <label>Price Type: </label>
+        <button class="btn btn-default btn-sm" ng-model="sortPredicate"
+                bs-options="option.key as option.text for option in priceTypes" bs-select></button>
+        <spam>&nbsp&nbsp&nbsp&nbsp</spam>
+        <label>Price Sort</label>
+        <div class="dropdown" id="">
+            <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">{{sortReverse?"Highest to
+                Lowest":"Lowest to Highest"}} <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li ng-click="sortReverse=true"><a>Highest to Lowest</a></li>
+                <li ng-click="sortReverse=false"><a>Lowest to Highest</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="">
         <h2>Books</h2>
         <h3 ng-show="books.length==0">0 Results</h3>
-        <book ng-repeat="book in books" class="row"></book>
+        <book ng-repeat="book in books |orderBy:sortPredicate:sortReverse" class="row"></book>
     </div>
     <br>
-    <div class="panel-group">
+    <div class="panel-group" ng-show="searchType==='Professor' || searchType ==='Course' || searchType === 'Keyword'">
         <h2>Courses</h2>
         <h3 ng-show=" course_sections.length==0">0 Results</h3>
         <div ng-repeat="course_section in course_sections" class="panel panel-default">
@@ -18,12 +50,13 @@
                     <small><a ng-click="addAll(course_section)">Add All</a></small>
                 </h3>
                 <br class="row">
-                <book ng-repeat="book in course_section.required"></book>
+                <book ng-repeat="book in course_section.required" ng-show="showRequired"></book>
                 <br class="row">
                 <h3 ng-show="course_section.recommended.length" class="col-md-12">Recommended Books</h3><br class="row">
-                <book ng-repeat="book in course_section.recommended"></book>
+                <book ng-repeat="book in course_section.recommended" ng-show="showRecommended"></book>
             </div>
         </div>
+        <h2 ng-show="books.length==0 && course_sections.length==0">0 Results</h2>
     </div>
-    <h2 ng-show="books.length==0 && course_sections.length==0">0 Results</h2>
+
 </div>

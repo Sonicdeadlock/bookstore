@@ -1,15 +1,18 @@
 /**
  * Created by Sonicdeadlock on 3/2/2016.
  */
-angular.module('controllers').controller('searchBarController', function ($scope, $http, $rootScope) {
+angular.module('controllers').controller('searchBarController', function ($scope, $http, $state, $rootScope) {
     $scope.searchOptions = ['Title', 'Author', 'ISBN', 'Course', 'Professor', 'Keyword'];
     $scope.searchType = $rootScope.$stateParams.searchType || 'Title';
-    $scope.search = $rootScope.$stateParams.searchString;
+    $scope.searchText = $rootScope.$stateParams.searchString;
 
     $scope.typeaheadList = [];
     var allBooks = [];
     var professors = [];
     var courses = [];
+    $scope.search = function () {
+        $state.go('search', {searchType: $scope.searchType, searchString: $scope.searchText});
+    };
     $http.get('/api/books/getAll')
         .success(function (data) {
             allBooks = data;
