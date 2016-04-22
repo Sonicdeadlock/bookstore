@@ -34,6 +34,8 @@ angular.module('controllers').controller('cartController', function ($scope, $ht
                 quantity = item.quantityUsed;
                 break;
         }
+        if (quantity === 'inf')
+            quantity = 10;
         var quantities = [];
 
         for (var i = 0; i <= quantity; i++) {

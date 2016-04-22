@@ -19,7 +19,7 @@
             <p>${{book.priceNew}}</p>
             <p ng-if="book.quantityNew>=1">{{book.quantityNew}} left in stock</p>
             <p ng-if="book.quantityNew<1"><b class="text-danger">Out of Stock</b></p>
-            <button class="btn btn-primary" ng-class="{disabled:book.quantityNew<=1}" ng-click="add('NEW')">Add to
+            <button class="btn btn-primary" ng-class="{disabled:book.quantityNew<=0}" ng-click="add('NEW')">Add to
                 cart
             </button>
         </div>
@@ -28,7 +28,7 @@
             <p>${{book.priceUsed}}</p>
             <p ng-if="book.quantityUsed>=1">{{book.quantityUsed}} left in stock</p>
             <p ng-if="book.quantityUsed<1"><b class="text-danger">Out of Stock</b></p>
-            <button class="btn btn-primary" ng-class="{disabled:book.quantityUsed<=1}" ng-click="add('USED')">Add to
+            <button class="btn btn-primary" ng-class="{disabled:book.quantityUsed<=0}" ng-click="add('USED')">Add to
                 cart
             </button>
         </div>
@@ -37,7 +37,7 @@
             <p>${{book.priceEBook}}</p>
             <br><br ng-if="book.quantityEBook>=1">
             <p ng-if="book.quantityEBook<1"><b class="text-danger">Not Available</b></p>
-            <button class="btn btn-primary" ng-class="{disabled:book.quantityEBook<=1}" ng-click="add('EBOOK')">Add to
+            <button class="btn btn-primary" ng-class="{disabled:book.quantityEBook<=0}" ng-click="add('EBOOK')">Add to
                 cart
             </button>
         </div>
@@ -46,7 +46,7 @@
             <p>${{book.priceRental}}</p>
             <p ng-if="book.quantityRental>=1">{{book.quantityRental}} left in stock</p>
             <p ng-if="book.quantityRental<1"><b class="text-danger">Out of Stock</b></p>
-            <button class="btn btn-primary" ng-class="{disabled:book.quantityRental<=1}" ng-click="add('RENT')">Add to
+            <button class="btn btn-primary" ng-class="{disabled:book.quantityRental<=0}" ng-click="add('RENT')">Add to
                 cart
             </button>
         </div>

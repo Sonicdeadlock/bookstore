@@ -88,16 +88,19 @@ function checkout(req, res) {
         cart.forEach(function (item) {
             switch (item.purchaseType) {
                 case 'RENT':
+                    if (item.quantity != 12345)
                     datastore.increment(item.ISBN, item.quantity * -1, 'quantityRental');
                     item.type = 'Rental';
                     total += item.totalPrice;
                     break;
                 case "NEW":
+                    if (item.quantity != 12345)
                     datastore.increment(item.ISBN, item.quantity * -1, 'quantityNew');
                     item.type = 'New';
                     total += item.totalPrice;
                     break;
                 case "USED":
+                    if (item.quantity != 12345)
                     datastore.increment(item.ISBN, item.quantity * -1, 'quantityUsed');
                     item.type = 'Used';
                     total += item.totalPrice;
