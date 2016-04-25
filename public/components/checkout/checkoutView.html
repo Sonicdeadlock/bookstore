@@ -3,7 +3,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Shipping Information</div>
             <div class="panel-body">
-                <form class="form-horizontal container">
+                <form class="form-horizontal col-md-12">
                     <div class="form-group">
                         <label>First Name</label>
                         <input class="form-control" ng-model="shippingInformation.first_name">
@@ -44,12 +44,17 @@
                     </div>
                 </div>
                 <div ng-show="checkoutStyle == 'Paypal'">
-                    <h2>If a Paypal window doesn't come up in 10 seconds <a ng-click="checkout()">click here</a>
-                        <small>This is just a place holder, click the continue button to proceed</small>
-                    </h2>
+                    <form ng-submit="checkout()" class="form-horizontal">
+                        <label class="control-label">PayPal Username:</label>
+                        <input class="form-control" type="text" ng-model="billingInformation.paypal_username">
+                        <label class="control-label">PayPal Password:</label>
+                        <input class="form-control" type="password" ng-model="billingInformation.paypalPassword">
+                        <br>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </form>
                 </div>
                 <div ng-show="checkoutStyle == 'CreditCard'">
-                    <form class="form-horizontal container">
+                    <form class="form-horizontal col-md-12">
                         <button ng-click="cloneFromShipping()" class="btn btn-success">Copy From Shipping Information
                         </button>
                         <div class="form-group">
@@ -81,14 +86,14 @@
                             <input class="form-control" ng-model="billingInformation.credit_card_number" type="number">
                         </div>
                         <div class="form-group">
-                            <label>CVC</label>
-                            <input class="form-control" ng-model="billingInformation.cvc" type="number">
+                            <label>CVV</label>
+                            <input class="form-control" ng-model="billingInformation.cvv" type="number">
                         </div>
                         <div class="form-group form-inline">
                             <label>Expiration Date (MM/YY): </label>
-                            <input class="form-control" ng-model="billingInformation.expiration_month" type="number">
-                            <span>/</span>
-                            <input class="form-control" ng-model="billingInformation.expiration_year" type="number">
+                            <input class="form-control" ng-model="billingInformation.expiration" bs-datepicker
+                                   data-start-view="1" data-min-view="1" data-date-format="MM/yy">
+
                         </div>
                         <button class="btn btn-primary" ng-click="checkout();">Checkout</button>
                     </form>

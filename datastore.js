@@ -34,7 +34,9 @@ module.exports = {
         });
     },
     searchTitle: function (title) {
-        return _.filter(bookData, {title: title});
+        return _.filter(bookData, function (BD) {
+            return BD.title.indexOf(title) != -1;
+        });
     },
     searchAuthorFuzzy: function (authorPart) {
         return _.filter(bookData, function (book) {
@@ -125,8 +127,11 @@ module.exports = {
         fs.writeFile('books.tsv', lines.join('\n'));
     },
     increment: function (ISBN, amount, field) {
-        this.searchISBN(ISBN)[field] = Number(this.searchISBN(ISBN)[field]) + amount;
-        this.save();
+        if (this.searchISBN(ISBN)[field] !== 'inf') {
+            this.searchISBN(ISBN)[field] = Number(this.searchISBN(ISBN)[field]) + amount;
+            this.save();
+        }
+
     },
     bookData: bookData
 };

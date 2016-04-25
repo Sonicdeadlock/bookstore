@@ -3,13 +3,12 @@
         <div class="input-group">
         <span class="input-group-btn">
             <button class="btn btn-default" ng-model="searchType"
-                    bs-options="option as option for option in searchOptions" bs-select></button>
+                    bs-options="option as option for option in searchOptions" bs-select type="button"></button>
         </span>
 
             <input class="form-control" ng-model="searchText" bs-options="s as s for s in typeaheadList" bs-typeahead>
         <span class="input-group-btn">
-        <button class="btn btn-primary" type="submit">Go
-        </button>
+        <button class="btn btn-primary" type="submit">Go</button>
       </span>
     </div>
     </form>

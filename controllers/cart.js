@@ -56,6 +56,10 @@ function get(req, res) {
 function checkout(req, res) {
     if (!req.session.cart) {
         res.status(404).send();
+    } else if (req.body.billingInformation.paymentMethod === 'CreditCard' && !isValidCreditCard(req.body.billingInformation)) {
+        res.status(403).send('Invalid Credit Card information');
+    } else if (req.body.billingInformation.paymentMethod === 'Paypal' && req.body.billingInformation.paypalPassword !== '12345678') {
+        res.status(403).send('Invalid Paypal login');
     }
     else {
         var cart = req.session.cart;
@@ -64,23 +68,26 @@ function checkout(req, res) {
             switch (item.purchaseType) {
                 case 'RENT':
                     if (datastore.searchISBN(item.ISBN).quantityRental < item.quantity) {
-                        res.status(403).send('Not Enough Quantity of book: ' + item.title + ' and type:' + item.purchaseType);
+                        res.status(403).send('Not Enough Quantity of book: ' + item.title + ' and type: ' + item.purchaseType);
                         return;
                     }
                     break;
                 case "NEW":
                     if (datastore.searchISBN(item.ISBN).quantityNew < item.quantity) {
-                        res.status(403).send('Not Enough Quantity of book: ' + item.title + ' and type:' + item.purchaseType);
+                        res.status(403).send('Not Enough Quantity of book: ' + item.title + ' and type: ' + item.purchaseType);
                         return;
                     }
                     break;
                 case "USED":
                     if (datastore.searchISBN(item.ISBN).quantityUsed < item.quantity) {
-                        res.status(403).send('Not Enough Quantity of book: ' + item.title + ' and type:' + item.purchaseType);
+                        res.status(403).send('Not Enough Quantity of book: ' + item.title + ' and type: ' + item.purchaseType);
                         return;
                     }
                     break;
                 case "EBOOK":
+                    if (datastore.searchISBN(item.ISBN).quantityEBook == 0) {
+                        res.status(403).send(item.title + ' is not offered as an EBook')
+                    }
                     break;
             }
         }
@@ -88,19 +95,19 @@ function checkout(req, res) {
         cart.forEach(function (item) {
             switch (item.purchaseType) {
                 case 'RENT':
-                    if (item.quantity != 12345)
+                    if (item.quantity !== 'inf')
                     datastore.increment(item.ISBN, item.quantity * -1, 'quantityRental');
                     item.type = 'Rental';
                     total += item.totalPrice;
                     break;
                 case "NEW":
-                    if (item.quantity != 12345)
+                    if (item.quantity !== 'inf')
                     datastore.increment(item.ISBN, item.quantity * -1, 'quantityNew');
                     item.type = 'New';
                     total += item.totalPrice;
                     break;
                 case "USED":
-                    if (item.quantity != 12345)
+                    if (item.quantity !== 'inf')
                     datastore.increment(item.ISBN, item.quantity * -1, 'quantityUsed');
                     item.type = 'Used';
                     total += item.totalPrice;
@@ -125,6 +132,20 @@ function checkout(req, res) {
     }
 }
 
+function isValidCreditCard(creditCardData) {
+    if (!creditCardData)
+        return false;
+    if (creditCardData.cvv !== 777)
+        return false;
+    if (!Number(creditCardData.credit_card_number))
+        return false;
+    if (String(creditCardData.credit_card_number).length !== 16)
+        return false;
+    if (creditCardData.expiration < _.now())
+        return false;
+    return true;
+}
+
 module.exports.add = add;
 module.exports.remove_request = function (req, res) {
     req.session.cart = _.reject(req.session.cart, {id: req.params.item_id});
@@ -134,3 +155,6 @@ module.exports.count = count;
 module.exports.get = get;
 module.exports.checkout = checkout;
 module.exports.update = update;
+module.exports.isValidCreditCard = function (req, res) {
+    res.json(isValidCreditCard(req.body));
+};

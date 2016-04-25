@@ -6,11 +6,14 @@ var router = express.Router();
 
 router.route('/login')
     .post(function (req, res) {
-        if (req.body.password == '1234') {
+        if (req.body.username.match(new RegExp('(^[A-Za-z]{5}[1-9]+)')) == null) {
+            res.status(403).send('Invalid Username');
+        }
+        else if (req.body.password == '12345678') {
             res.status(200).json({
                 shippingInformation: {
-                    first_name: 'dummy name',
-                    last_name: 'dummy name',
+                    first_name: req.body.username[0],
+                    last_name: req.body.username.substr(1, 4),
                     address: 'dummy address',
                     state: 'dummy state',
                     zip: 'dummy zip',
@@ -19,7 +22,7 @@ router.route('/login')
             });
         }
         else {
-            res.status(403).send('Invalid Password')
+            res.status(403).send('Invalid Password');
         }
 
     });

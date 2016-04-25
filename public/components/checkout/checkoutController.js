@@ -1,14 +1,16 @@
 /**
  * Created by athom317 on 3/17/2016.
  */
-angular.module('controllers').controller('checkoutController', function ($scope, $http, $rootScope) {
+angular.module('controllers').controller('checkoutController', function ($scope, $http, $rootScope, $alert) {
     $scope.showCheckoutStyles = true;
     $scope.billingInformation = {};
     $scope.shippingInformation = {};
+    var alerts = [];
     if ($rootScope.logged_in_user && $rootScope.logged_in_user.shippingInformation) {
         $scope.shippingInformation = $rootScope.logged_in_user.shippingInformation;
     }
     $rootScope.$watch('logged_in_user', function () {
+        if ($rootScope.logged_in_user && $rootScope.logged_in_user.shippingInformation)
         $scope.shippingInformation = $rootScope.logged_in_user.shippingInformation;
     });
     $scope.setCheckoutStyle = function (style) {
@@ -27,9 +29,16 @@ angular.module('controllers').controller('checkoutController', function ($scope,
             })
             .success(function (data) {
                 $scope.receipt = data;
-                //todo:navigate to landing
+                _.forEach(alerts, function (alert) {
+                    alert.destroy();
+                });
+                alerts = [];
             }).error(function (errors) {
-            //todo:show errors
+            var alert = $alert({content: errors, placement: 'top', show: true, type: 'danger'});
+            alerts.push(alert);
+            setTimeout(function () {
+                alert.destroy();
+            }, 1000 * 6)
         })
     }
 
