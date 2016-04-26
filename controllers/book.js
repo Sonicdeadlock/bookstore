@@ -7,7 +7,7 @@ var _ = require('lodash');
 
 function getByTitle(req, res) {
     var title = req.params.title;
-    res.json(datastore.searchTitle(title));
+    res.json(datastore.searchTitleFuzzy(title));
 
 }
 
@@ -18,7 +18,7 @@ function getByISBN(req, res) {
 
 function getByAuthor(req, res) {
     var author = req.params.author;
-    res.json(datastore.searchAuthor(author));
+    res.json(datastore.searchAuthorFuzzy(author));
 }
 
 function getAll(req, res) {

@@ -12,7 +12,7 @@ function get(req, res) {
 
 function get_books(req, res) {
     var professor = req.params.professor;
-    res.json(datastore.courseFormat(datastore.searchProfessor(professor)));
+    res.json(datastore.courseFormat(datastore.searchProfessorFuzzy(professor)));
 }
 
 module.exports.get_books = get_books;

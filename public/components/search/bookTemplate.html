@@ -1,4 +1,4 @@
-<div class="col-md-12 container clearfix">
+<div class="col-md-12  clearfix">
     <img ui-sref="book({bookId:book.ISBN})" src="/BookImages/{{book.ISBN}}.jpg"
          class="img-responsive book-image pull-right">
     <p><b><a ui-sref="book({bookId:book.ISBN})">{{book.title}} </a></b>
@@ -23,6 +23,6 @@
     <p><b>EBook: </b><span ng-class="{strikethrough:book.quantityEBook<=0}">${{book.priceEBook}}<a
             ng-if="book.quantityEBook>0" ng-click="add(book,'EBOOK')"> Add To Cart</a></span> <b
             ng-if="book.quantityEBook<=0" class="text-danger"> Not Available</b></p>
-
+    <hr class="col-md-12 " ng-if="!$last">
 </div>
-<hr class="col-md-12" ng-if="!$last">
+
