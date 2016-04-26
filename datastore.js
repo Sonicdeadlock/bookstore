@@ -19,9 +19,68 @@ fs.readFile(config.datastore.path, 'utf8', function (err, data) {
         for (var i = 0; i < columns.length; i++) {
             obj[tokens[i]] = columns[i];
         }
-        bookData.push(obj);
+        bookData.push(validatDatum(obj));
     });
 });
+
+function validatDatum(datum) {
+    if (_.isNull(datum.ISBN)) {
+        throw "Missing ISBN\n" + JSON.stringify(datum);
+    }
+    if (_.isNull(datum.title)) {
+        throw "Missing Title \n" + JSON.stringify(datum);
+    }
+    if (_.isNull(datum.author)) {
+        datum.author = 'Unknown';
+    }
+    if (_.isNull(datum.semester)) {
+        datum.semester = 'Unknown';
+    }
+    if (_.isNull(datum.course)) {
+        datum.course = "";
+    }
+    if (_.isNull(datum.section)) {
+        datum.section = 0;
+    }
+    if (_.isNull(datum.professor)) {
+        datum.professor = "";
+    }
+    if (_.isNull(datum.CRN)) {
+        datum.CRN = 0;
+    }
+    if (_.isNull(datum.use)) {
+        datum.use = undefined;
+    }
+    if (!_.isFinite(datum.quantityNew) && datum.quantityNew !== 'inf') {
+        datum.quantityNew = 0;
+    }
+    if (!_.isFinite(datum.quantityUsed) && datum.quantityUsed !== 'inf') {
+        datum.quantityUsed = 0;
+    }
+    if (!_.isFinite(datum.quantityRental) && datum.quantityRental !== 'inf') {
+        datum.quantityRental = 0;
+    }
+    if (!_.isFinite(datum.quantityEBook) && datum.quantityEBook !== 'inf') {
+        datum.quantityEBook = 0;
+    }
+    if (!_.isFinite(datum.priceNew)) {
+        datum.priceNew = 1;
+    }
+    if (!_.isFinite(datum.priceUsed)) {
+        datum.priceUsed = 1;
+    }
+    if (!_.isFinite(datum.priceRental)) {
+        datum.priceRental = 1;
+    }
+    if (!_.isFinite(datum.priceEBook)) {
+        datum.priceEBook = 1;
+    }
+    if (_.isNil(datum.description)) {
+        datum.description = 'No description available';
+    }
+
+    return datum;
+}
 
 module.exports = {
     searchISBN: function (ISBN) {
@@ -127,10 +186,13 @@ module.exports = {
         fs.writeFile('books.tsv', lines.join('\n'));
     },
     increment: function (ISBN, amount, field) {
-        if (this.searchISBN(ISBN)[field] !== 'inf') {
-            this.searchISBN(ISBN)[field] = Number(this.searchISBN(ISBN)[field]) + amount;
-            this.save();
-        }
+        _.forEach(_.filter(bookData, {ISBN: ISBN}), function (bkd) {
+            if (bkd[field] !== 'inf') {
+                bkd[field] = Number(bkd[field]) + amount;
+                this.save();
+            }
+        });
+        
 
     },
     bookData: bookData

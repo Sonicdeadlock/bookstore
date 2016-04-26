@@ -7,7 +7,6 @@ var _ = require('lodash');
 
 function getByTitle(req, res) {
     var title = req.params.title;
-    ;
     res.json(datastore.searchTitle(title));
 
 }

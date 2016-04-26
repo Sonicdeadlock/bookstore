@@ -7,26 +7,51 @@ var uid = require('uid');
 var fs = require('fs');
 
 function add(req, res) {
-    var cart = req.session.cart || [];
-    req.body.id = uid();
-    req.body.quantity = req.body.quantity || 1;
-    switch (req.body.purchaseType) {
-        case 'RENT':
-            req.body.totalPrice = datastore.searchISBN(req.body.ISBN).priceRental * req.body.quantity;
-            break;
-        case "NEW":
-            req.body.totalPrice = datastore.searchISBN(req.body.ISBN).priceNew * req.body.quantity;
-            break;
-        case "USED":
-            req.body.totalPrice = datastore.searchISBN(req.body.ISBN).priceUsed * req.body.quantity;
-            break;
-        case "EBOOK":
-            req.body.totalPrice = datastore.searchISBN(req.body.ISBN).priceEBook;
-            break;
+    if (
+        _.isNull(req.body.ISBN) ||
+        _.isNull(req.body.title) ||
+        _.isNull(req.body.author) ||
+        _.isNull(req.body.semester) ||
+        _.isNull(req.body.course) ||
+        _.isNull(req.body.section) ||
+        _.isNull(req.body.professor) ||
+        _.isNull(req.body.CRN) ||
+        _.isNull(req.body.use) ||
+        _.isNull(req.body.quantityNew) ||
+        _.isNull(req.body.quantityUsed) ||
+        _.isNull(req.body.quantityRental) ||
+        _.isNull(req.body.quantityEBook) ||
+        _.isNull(req.body.priceNew) ||
+        _.isNull(req.body.priceUsed) ||
+        _.isNull(req.body.priceRental) ||
+        _.isNull(req.body.priceEBook) ||
+        _.isNull(req.body.description)
+    ) {
+        res.status(304).send('Invalid Book')
     }
-    cart.push(req.body);
-    req.session.cart = cart;
-    res.status(200).send();
+    else {
+        var cart = req.session.cart || [];
+        req.body.id = uid();
+        req.body.quantity = req.body.quantity || 1;
+        switch (req.body.purchaseType) {
+            case 'RENT':
+                req.body.totalPrice = datastore.searchISBN(req.body.ISBN).priceRental * req.body.quantity;
+                break;
+            case "NEW":
+                req.body.totalPrice = datastore.searchISBN(req.body.ISBN).priceNew * req.body.quantity;
+                break;
+            case "USED":
+                req.body.totalPrice = datastore.searchISBN(req.body.ISBN).priceUsed * req.body.quantity;
+                break;
+            case "EBOOK":
+                req.body.totalPrice = datastore.searchISBN(req.body.ISBN).priceEBook;
+                break;
+        }
+        cart.push(req.body);
+        req.session.cart = cart;
+        res.status(200).send();
+    }
+
 }
 
 function update(req, res) {
