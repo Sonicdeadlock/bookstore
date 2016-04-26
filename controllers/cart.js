@@ -8,24 +8,25 @@ var fs = require('fs');
 
 function add(req, res) {
     if (
-        _.isNull(req.body.ISBN) ||
-        _.isNull(req.body.title) ||
-        _.isNull(req.body.author) ||
-        _.isNull(req.body.semester) ||
-        _.isNull(req.body.course) ||
-        _.isNull(req.body.section) ||
-        _.isNull(req.body.professor) ||
-        _.isNull(req.body.CRN) ||
-        _.isNull(req.body.use) ||
-        _.isNull(req.body.quantityNew) ||
-        _.isNull(req.body.quantityUsed) ||
-        _.isNull(req.body.quantityRental) ||
-        _.isNull(req.body.quantityEBook) ||
-        _.isNull(req.body.priceNew) ||
-        _.isNull(req.body.priceUsed) ||
-        _.isNull(req.body.priceRental) ||
-        _.isNull(req.body.priceEBook) ||
-        _.isNull(req.body.description)
+        _.isNil(req.body.ISBN) ||
+        _.isNil(req.body.title) ||
+        _.isNil(req.body.author) ||
+        _.isNil(req.body.semester) ||
+        _.isNil(req.body.course) ||
+        _.isNil(req.body.section) ||
+        _.isNil(req.body.professor) ||
+        _.isNil(req.body.CRN) ||
+        _.isNil(req.body.use) ||
+        _.isNil(req.body.quantityNew) ||
+        _.isNil(req.body.quantityUsed) ||
+        _.isNil(req.body.quantityRental) ||
+        _.isNil(req.body.quantityEBook) ||
+        _.isNil(req.body.priceNew) ||
+        _.isNil(req.body.priceUsed) ||
+        _.isNil(req.body.priceRental) ||
+        _.isNil(req.body.priceEBook) ||
+        _.isNil(req.body.description) ||
+        _.isNil(datastore.searchISBN(req.body.ISBN))
     ) {
         res.status(304).send('Invalid Book')
     }
@@ -81,6 +82,10 @@ function get(req, res) {
 function checkout(req, res) {
     if (!req.session.cart) {
         res.status(404).send();
+    } else if (!isValidLocation(req.body.shippingInformation)) {
+        res.status(403).send('Invalid shipping information');
+    } else if (req.body.billingInformation.paymentMethod === 'CreditCard' && !isValidLocation(req.body.billingInformation)) {
+        res.status(403).send('Invalid billing information');
     } else if (req.body.billingInformation.paymentMethod === 'CreditCard' && !isValidCreditCard(req.body.billingInformation)) {
         res.status(403).send('Invalid Credit Card information');
     } else if (req.body.billingInformation.paymentMethod === 'Paypal' && req.body.billingInformation.paypalPassword !== '12345678') {
@@ -169,6 +174,18 @@ function isValidCreditCard(creditCardData) {
     if (creditCardData.expiration < _.now())
         return false;
     return true;
+}
+
+function isValidLocation(locationData) {
+    return !(
+        _.isNil(locationData.first_name) ||
+        _.isNil(locationData.last_name) ||
+        _.isNil(locationData.state) ||
+        _.isNil(locationData.city) ||
+        _.isNil(locationData.address) ||
+        _.isNil(locationData.zip) ||
+        String(locationData.zip).length !== 5
+    )
 }
 
 module.exports.add = add;

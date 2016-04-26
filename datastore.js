@@ -51,28 +51,28 @@ function validatDatum(datum) {
     if (_.isNull(datum.use)) {
         datum.use = undefined;
     }
-    if (!_.isFinite(datum.quantityNew) && datum.quantityNew !== 'inf') {
+    if (!_.isFinite(Number(datum.quantityNew)) && datum.quantityNew !== 'inf') {
         datum.quantityNew = 0;
     }
-    if (!_.isFinite(datum.quantityUsed) && datum.quantityUsed !== 'inf') {
+    if (!_.isFinite(Number(datum.quantityUsed)) && datum.quantityUsed !== 'inf') {
         datum.quantityUsed = 0;
     }
-    if (!_.isFinite(datum.quantityRental) && datum.quantityRental !== 'inf') {
+    if (!_.isFinite(Number(datum.quantityRental)) && datum.quantityRental !== 'inf') {
         datum.quantityRental = 0;
     }
-    if (!_.isFinite(datum.quantityEBook) && datum.quantityEBook !== 'inf') {
+    if (!_.isFinite(Number(datum.quantityEBook)) && datum.quantityEBook !== 'inf') {
         datum.quantityEBook = 0;
     }
-    if (!_.isFinite(datum.priceNew)) {
+    if (!_.isFinite(Number(datum.priceNew))) {
         datum.priceNew = 1;
     }
-    if (!_.isFinite(datum.priceUsed)) {
+    if (!_.isFinite(Number(datum.priceUsed))) {
         datum.priceUsed = 1;
     }
-    if (!_.isFinite(datum.priceRental)) {
+    if (!_.isFinite(Number(datum.priceRental))) {
         datum.priceRental = 1;
     }
-    if (!_.isFinite(datum.priceEBook)) {
+    if (!_.isFinite(Number(datum.priceEBook))) {
         datum.priceEBook = 1;
     }
     if (_.isNil(datum.description)) {

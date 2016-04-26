@@ -31,7 +31,7 @@
             </ul>
         </div>
     </div>
-    <div class="">
+    <div class="" ng-hide="searchType==='Professor' || searchType ==='Course' ">
         <h2>Books</h2>
         <h3 ng-show="books.length==0">0 Results</h3>
         <book ng-repeat="book in books |orderBy:sortPredicate:sortReverse" class="row"></book>
