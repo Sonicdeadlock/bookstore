@@ -1,8 +1,8 @@
 <div class="col-md-10">
     <div ng-repeat="item in cart_items" class="panel">
         <div class="panel-body">
-            <img src="/BookImages/{{item.ISBN}}.jpg" class="icon-image">
-            <b>{{item.title}}</b>
+            <img src="/BookImages/{{item.ISBN}}.jpg" class="icon-image" ui-sref="book({bookId:item.ISBN})">
+            <b><a ui-sref="book({bookId:item.ISBN})">{{item.title}}</a></b>
 
             <div class="pull-right">
                 <div ng-if="item.purchaseType != 'EBOOK'" style="display:inline-block;">
