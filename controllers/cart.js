@@ -26,6 +26,8 @@ function add(req, res) {
         _.isNil(req.body.priceRental) ||
         _.isNil(req.body.priceEBook) ||
         _.isNil(req.body.description) ||
+        _.isNil(req.body.purchaseType) ||
+        (req.body.purchaseType !== 'NEW' && req.body.purchaseType !== 'USED' && req.body.purchaseType !== 'RENT' && req.body.purchaseType !== 'EBOOK') ||
         _.isNil(datastore.searchISBN(req.body.ISBN))
     ) {
         res.status(304).send('Invalid Book')
@@ -56,14 +58,23 @@ function add(req, res) {
 }
 
 function update(req, res) {
-    var index = _.findIndex(req.session.cart, {id: req.body.id});
-    if (index != -1) {
-        req.session.cart[index] = req.body;
-        res.status(200).send();
+    if (
+        !_.isFinite(req.body.quantity) ||
+        (req.body.purchaseType !== 'NEW' && req.body.purchaseType !== 'USED' && req.body.purchaseType !== 'RENT' && req.body.purchaseType !== 'EBOOK')
+    ) {
+        res.status(304).send();
     }
     else {
-        res.status(404).send();
+        var index = _.findIndex(req.session.cart, {id: req.body.id});
+        if (index != -1) {
+            req.session.cart[index] = req.body;
+            res.status(200).send();
+        }
+        else {
+            res.status(404).send();
+        }
     }
+
 }
 
 function count(req, res) {
