@@ -16,7 +16,7 @@ router.route('/login')
                     last_name: req.body.username.substr(1, 4),
                     address: 'dummy address',
                     state: 'dummy state',
-                    zip: 'dummy zip',
+                    zip: '30043',
                     city: 'dummy city'
                 }
             });

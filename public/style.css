@@ -44,3 +44,7 @@ img.icon-image.small {
 .dropdown {
     display: inline-block;
 }
+
+.ng-invalid.ng-touched, .ng-valid-required.ng-touched.ng-empty {
+    border-color: #ac2925;
+}
