@@ -2,3 +2,16 @@
     <div class="jumbotron"><h1>&nbspKSU Online Book Store</h1></div>
     <p></p>
 </div>
+
+<div class="panel col-md-10 col-md-offset-1">
+    <h2>Featured Books</h2>
+    <div class="panel-body">
+        <div class="col-md-4" ng-repeat="book in bookSample">
+            <img ui-sref="book({bookId:book.ISBN})" src="/BookImages/{{book.ISBN}}.jpg"
+                 class="img-responsive book-image">
+            </img>
+            <p><b><a ui-sref="book({bookId:book.ISBN})">{{book.title}} </a></b></p>
+            <p>{{book.description | limitTo:100}}<span ng-if="book.description.length>100">...</span></p>
+        </div>
+    </div>
+</div>

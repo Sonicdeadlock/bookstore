@@ -1,18 +1,20 @@
-<div class="col-md-10">
-    <div ng-repeat="item in cart_items" class="panel">
-        <div class="panel-body">
-            <img src="/BookImages/{{item.ISBN}}.jpg" class="icon-image" ui-sref="book({bookId:item.ISBN})">
-            <b><a ui-sref="book({bookId:item.ISBN})">{{item.title}}</a></b>
-
-            <div class="pull-right">
-                <div ng-if="item.purchaseType != 'EBOOK'" style="display:inline-block;">
-                    <button class="btn btn-default" bs-dropdown>Quantity: {{item.quantity| json}}</button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li ng-repeat="quantity in getQuantity(item)"><a ng-click="change_quantity(item,quantity)">{{quantity}}</a>
-                        </li>
-                    </ul>
-                </div>
-                <div style="display:inline-block;">
+<div class="col-md-10 col-md-offset-1">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th></th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in cart_items">
+            <td><img src="/BookImages/{{item.ISBN}}.jpg" class="icon-image" ui-sref="book({bookId:item.ISBN})"></td>
+            <td><b><a ui-sref="book({bookId:item.ISBN})">{{item.title}}</a></b></td>
+            <td>
                     <button class="btn btn-default" bs-dropdown>{{item.purchaseType | capitalize}}</button>
                     <ul class="dropdown-menu" role="menu">
                         <li ng-class="{disabled:item.quantityNew<1}"><a
@@ -24,18 +26,21 @@
                         <li ng-class="{disabled:item.book.quanaityRent<1}"><a
                                 ng-click="change_purchase_type(item,'RENT')">Rent</a></li>
                     </ul>
+            </td>
+            <td>
+                <div ng-if="item.purchaseType != 'EBOOK'" style="">
+                    <button class="btn btn-default" bs-dropdown>Quantity: {{item.quantity| json}}</button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="quantity in getQuantity(item)"><a ng-click="change_quantity(item,quantity)">{{quantity}}</a>
+                        </li>
+                    </ul>
                 </div>
-
-                <div class="pull-right container-fluid">
-                    <button class="btn btn-danger pull-right" ng-click="remove(item)"><span class="fa fa-remove"></span>
-                    </button>
-                    <br><br>
-                    <p><b>Cost: </b>{{item.quantity}} x ${{getPrice(item)}} = </p>
-                    <p class="pull-right">${{item.quantity * getPrice(item)| number:2}}</p>
-                </div>
-            </div>
-        </div>
-    </div>
+            </td>
+            <td>${{getPrice(item)}}</td>
+            <td>${{item.quantity * getPrice(item)| number:2}}</td>
+        </tr>
+        </tbody>
+    </table>
     <div class="pull-right">
         <p class=""><b>Total: </b>${{getTotal()|number:2}}</p>
         <button class="btn btn-primary" ui-sref="checkout">Checkout</button>

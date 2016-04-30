@@ -94,8 +94,8 @@
                         </div>
                         <div class="form-group">
                             <label>Credit Card Number</label>
-                            <input class="form-control" ng-model="billingInformation.credit_card_number" type="number"
-                                   ng-required ng-maxlength="12" ng-minlength="12">
+                            <input class="form-control" ng-model="billingInformation.credit_card_number" type="text"
+                                   ng-required ng-maxlength="20" ng-minlength="16">
                         </div>
                         <div class="form-group">
                             <label>CVV</label>
@@ -106,7 +106,7 @@
                             <label>Expiration Date (MM/YY): </label>
                             <input class="form-control" ng-model="billingInformation.expiration" bs-datepicker
                                    data-start-view="1" data-min-view="1" data-date-format="MM/yy" ng-required
-                                   ng-minlength="1">
+                            >
 
                         </div>
                         <button class="btn btn-primary" type="submit">Checkout</button>
@@ -117,14 +117,18 @@
 
     </div>
 </div>
-<div class="col-md-10 col-md-offset-1" ng-show="receipt">
-    <h4>Items</h4>
-    <ul>
+<div class="col-md-10 col-md-offset-1 well" ng-show="receipt">
+    <h2>Checkout Complete</h2>
+
+    <h4>Order</h4>
+    <ul class="list-unstyled">
         <li ng-repeat="item in receipt.items">{{item.title}} {{item.type}} x {{item.quantity}} = {{item.totalPrice}}
         </li>
     </ul>
     <p><b>Total:</b> {{receipt.total}}</p>
-    <p><b>Payment Type:</b> {{receipt.payment.paymentMethod}}</p>
+    <p><b>Payment Type:</b> {{receipt.payment.paymentMethod}} <span
+            ng-if="receipt.payment.paymentMethod==='CreditCard'">xxxx xxxx xxxx {{receipt.payment.credit_card_number | last4}}</span>
+    </p>
     <h4>Shipping</h4>
     <p>{{receipt.shipping.first_name}} {{receipt.shipping.last_name}}</p>
     <p>{{receipt.shipping.address}}</p>

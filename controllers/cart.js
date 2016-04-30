@@ -59,7 +59,8 @@ function add(req, res) {
 
 function update(req, res) {
     if (
-        !_.isFinite(req.body.quantity) ||
+        req.body.quantity === null ||
+        req.body.quantity === undefined || !_.isFinite(_.toNumber(req.body.quantity)) ||
         (req.body.purchaseType !== 'NEW' && req.body.purchaseType !== 'USED' && req.body.purchaseType !== 'RENT' && req.body.purchaseType !== 'EBOOK')
     ) {
         res.status(304).send();
@@ -94,13 +95,13 @@ function checkout(req, res) {
     if (!req.session.cart) {
         res.status(404).send();
     } else if (!isValidLocation(req.body.shippingInformation)) {
-        res.status(403).send('Invalid shipping information');
+        console.log('Invalid shipping information');
     } else if (req.body.billingInformation.paymentMethod === 'CreditCard' && !isValidLocation(req.body.billingInformation)) {
-        res.status(403).send('Invalid billing information');
+        console.log('Invalid billing information');
     } else if (req.body.billingInformation.paymentMethod === 'CreditCard' && !isValidCreditCard(req.body.billingInformation)) {
-        res.status(403).send('Invalid Credit Card information');
+        console.log('Invalid Credit Card information');
     } else if (req.body.billingInformation.paymentMethod === 'Paypal' && req.body.billingInformation.paypalPassword !== '12345678') {
-        res.status(403).send('Invalid Paypal login');
+        console.log('Invalid Paypal login');
     }
     else {
         var cart = req.session.cart;
@@ -176,18 +177,17 @@ function checkout(req, res) {
 function isValidCreditCard(creditCardData) {
     if (!creditCardData)
         return false;
-    if (creditCardData.cvv !== 777)
+    if (creditCardData.cvv !== 777 && creditCardData.cvv !== '777')
         return false;
-    if (!Number(creditCardData.credit_card_number))
+    if (creditCardData.credit_card_number.match(new RegExp(/(\b(\d{4}\s?){4}\b)/g)) == null)
         return false;
-    if (String(creditCardData.credit_card_number).length !== 16)
-        return false;
-    if (creditCardData.expiration < _.now())
+    if ((new Date(creditCardData.expiration)) < _.now())
         return false;
     return true;
 }
 
 function isValidLocation(locationData) {
+    locationData.zip = String(locationData.zip).trim();
     return !(
         _.isNil(locationData.first_name) ||
         _.isNil(locationData.last_name) ||
@@ -195,7 +195,8 @@ function isValidLocation(locationData) {
         _.isNil(locationData.city) ||
         _.isNil(locationData.address) ||
         _.isNil(locationData.zip) ||
-        String(locationData.zip).length !== 5
+        String(locationData.zip).length !== 5 ||
+        _.isNumber(locationData.zip)
     )
 }
 

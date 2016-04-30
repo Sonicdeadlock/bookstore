@@ -42,4 +42,8 @@ angular.module('controllers').controller('checkoutController', function ($scope,
         })
     }
 
+}).filter('last4', function () {
+    return function (input) {
+        return _.takeRight(input.trim(), 4).join('');
+    }
 });
