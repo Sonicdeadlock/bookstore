@@ -189,7 +189,8 @@ module.exports = {
         _.forEach(_.filter(bookData, {ISBN: ISBN}), function (bkd) {
             if (bkd[field] !== 'inf') {
                 bkd[field] = Number(bkd[field]) + amount;
-                this.save();
+                bkd[field] = String(bkd[field]);
+                save();
             }
         });
         
@@ -197,4 +198,16 @@ module.exports = {
     },
     bookData: bookData
 };
+
+function save() {
+    var lines = [];
+    var keys = _.keys(bookData[0]);
+    lines.push(keys.join(config.datastore.seperator));
+    _.map(bookData, function (bookDatum) {
+        return _.at(bookDatum, keys).join(config.datastore.seperator);
+    }).forEach(function (line) {
+        lines.push(line);
+    });
+    fs.writeFile('books.tsv', lines.join('\n'));
+}
 

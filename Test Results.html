@@ -304,7 +304,7 @@
                 if (value === null) {
                     value = '';
                     options.expires = -1;
-                }
+        }
                 var expires = '';
                 if (options.expires && (typeof options.expires == 'number' || options.expires.toUTCString)) {
                     var date;
@@ -313,7 +313,7 @@
                         date.setTime(date.getTime() + (options.expires * 24 * 60 * 60 * 1000));
                     } else {
                         date = options.expires;
-                    }
+            }
                     expires = '; expires=' + date.toUTCString(); // use expires attribute, max-age is not supported by IE
                 }
                 var path = options.path ? '; path=' + options.path : '';
@@ -330,8 +330,8 @@
                         if (cookie.substring(0, name.length + 1) == (name + '=')) {
                             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                             break;
-                        }
-                    }
+                }
+            }
                 }
                 return cookieValue;
             }
@@ -594,9 +594,9 @@
 <body>
 <div id="container">
     <div id="header">
-        <div class="time">518 ms</div>
-        <h1>Unnamed: <strong><span class="total">11 total, </span><span class="failed">2 failed, </span><span
-                class="passed">9 passed</span></strong>
+        <div class="time">4.88 s</div>
+        <h1>Unnamed: <strong><span class="total">201 total, </span><span class="ignored">24 ignored, </span><span
+                class="passed">177 passed</span></strong>
         </h1>
         <div id="treecontrol">
             <ul>
@@ -612,24 +612,24 @@
     </div>
     <div id="content">
         <ul id="tree">
-            <li xmlns="" class="level top failed open">
+            <li xmlns="" class="level top ignored open">
 <span><em class="time">
-    <div class="time">518 ms</div>
+    <div class="time">4.88 s</div>
 </em>The Cart API</span>
                 <ul>
                     <li class="level suite open">
 <span><em class="time">
-    <div class="time">470 ms</div>
+    <div class="time">478 ms</div>
 </em> add an item to the cart</span>
                         <ul>
                             <li class="level test">
 <span><em class="time">
-    <div class="time">142 ms</div>
+    <div class="time">145 ms</div>
 </em><em class="status">passed</em>should add a new item to the cart</span>
                             </li>
                             <li class="level test">
 <span><em class="time">
-    <div class="time">111 ms</div>
+    <div class="time">112 ms</div>
 </em><em class="status">passed</em>should add a used item to the cart</span>
                             </li>
                             <li class="level test">
@@ -639,63 +639,1000 @@
                             </li>
                             <li class="level test">
 <span><em class="time">
-    <div class="time">104 ms</div>
+    <div class="time">107 ms</div>
 </em><em class="status">passed</em>should add a EBook item to the cart</span>
                             </li>
                             <li class="level test">
 <span><em class="time">
-    <div class="time">5 ms</div>
+    <div class="time">6 ms</div>
 </em><em class="status">passed</em>should fail to add an item that doesn't exist to the cart</span>
                             </li>
                         </ul>
                     </li>
                     <li class="level suite open">
 <span><em class="time">
-    <div class="time">27 ms</div>
+    <div class="time">59 ms</div>
 </em> an added item should be in the cart</span>
                         <ul>
                             <li class="level test">
 <span><em class="time">
-    <div class="time">8 ms</div>
+    <div class="time">16 ms</div>
 </em><em class="status">passed</em>should have a cart count of 1</span>
                             </li>
                             <li class="level test">
 <span><em class="time">
-    <div class="time">10 ms</div>
+    <div class="time">20 ms</div>
 </em><em class="status">passed</em>should have one item in the cart</span>
                             </li>
                             <li class="level test">
 <span><em class="time">
-    <div class="time">9 ms</div>
+    <div class="time">23 ms</div>
 </em><em class="status">passed</em>should have two items in the cart</span>
                             </li>
                         </ul>
                     </li>
-                    <li class="level suite failed open">
+                    <li class="level suite open">
 <span><em class="time">
-    <div class="time">21 ms</div>
+    <div class="time">78 ms</div>
 </em> delete an item from the cart</span>
                         <ul>
-                            <li class="level test failed open">
-                                <span><em class="time"></em><em class="status">failed</em> should delete the first book from the cart</span>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">15 ms</div>
+</em><em class="status">passed</em> should delete the first book from the cart</span>
                             </li>
-                            <li class="level test failed open">
-                                <span><em class="time"></em><em class="status">failed</em>should delete the second book from the cart</span>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">38 ms</div>
+</em><em class="status">passed</em>should delete the second book from the cart</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">25 ms</div>
+</em><em class="status">passed</em>should do nothing when deleting a book from the cart that isn't in the cart</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="level suite open">
+<span><em class="time">
+    <div class="time">1.34 s</div>
+</em> update an item in the cart</span>
+                        <ul>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">30 ms</div>
+</em><em class="status">passed</em>should change the quantity of the first book in the cart</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">32 ms</div>
+</em><em class="status">passed</em>should change the quantity of the first book in the cart</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">36 ms</div>
+</em><em class="status">passed</em>should change the quantity of the second book in the cart</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">40 ms</div>
+</em><em class="status">passed</em>should change the quantity of the second book in the cart</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">32 ms</div>
+</em><em class="status">passed</em>should change the type of the first book in the cart to new</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">32 ms</div>
+</em><em class="status">passed</em>should change the type of the first book in the cart to used</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">32 ms</div>
+</em><em class="status">passed</em>should change the type of the first book in the cart to rental</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">30 ms</div>
+</em><em class="status">passed</em>should change the type of the first book in the cart to ebook</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">38 ms</div>
+</em><em class="status">passed</em>should change the type of the second book in the cart to new</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">35 ms</div>
+</em><em class="status">passed</em>should change the type of the second book in the cart to used</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">52 ms</div>
+</em><em class="status">passed</em>should change the type of the second book in the cart to rental</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">64 ms</div>
+</em><em class="status">passed</em>should change the type of the second book in the cart to ebook</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">28 ms</div>
+</em><em class="status">passed</em>should fail to change the quantity of the first book to an invalid value ({"quantity":null})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">27 ms</div>
+</em><em class="status">passed</em>should fail to change the quantity of the first book to an invalid value ({"quantity":"some text"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">25 ms</div>
+</em><em class="status">passed</em>should fail to change the quantity of the first book to an invalid value ({"quantity":"one"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">27 ms</div>
+</em><em class="status">passed</em>should fail to change the quantity of the first book to an invalid value ({"quantity":"two"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">25 ms</div>
+</em><em class="status">passed</em>should fail to change the quantity of the second book to an invalid value ({"quantity":null})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">32 ms</div>
+</em><em class="status">passed</em>should fail to change the quantity of the second book to an invalid value ({"quantity":"some text"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">28 ms</div>
+</em><em class="status">passed</em>should fail to change the quantity of the second book to an invalid value ({"quantity":"one"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">47 ms</div>
+</em><em class="status">passed</em>should fail to change the quantity of the second book to an invalid value ({"quantity":"two"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">39 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":1})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">40 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":"one"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">27 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":"new"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":"New"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":"nEW"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">30 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":"rent"})</span>
                             </li>
                             <li class="level test">
 <span><em class="time">
     <div class="time">21 ms</div>
-</em><em class="status">passed</em>should do nothing when deleting a book from the cart that isn't in the cart</span>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":"used"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">27 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":"ebook"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">24 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":"Rent"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":"Used"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">26 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":"Ebook"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">32 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the first book to an invalid value ({"purchaseType":"EBook"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">28 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":1})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":"one"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">33 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":"new"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":"New"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":"nEW"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":"rent"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":"used"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">27 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":"ebook"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":"Rent"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">25 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":"Used"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">39 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":"Ebook"})</span>
+                            </li>
+                            <li class="level test">
+<span><em class="time">
+    <div class="time">29 ms</div>
+</em><em class="status">passed</em>should fail to change the purchase type of the second book to an invalid value ({"purchaseType":"EBook"})</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="level suite ignored open">
+<span><em class="time">
+    <div class="time">2.93 s</div>
+</em> checkout</span>
+                        <ul>
+                            <li class="level suite open">
+<span><em class="time">
+    <div class="time">2.93 s</div>
+</em>test valid checkouts</span>
+                                <ul>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>shipping-test first_name value: some name</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">24 ms</div>
+</em><em class="status">passed</em>shipping-test first_name value: some name with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>shipping-test first_name value: some other name</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">17 ms</div>
+</em><em class="status">passed</em>shipping-test first_name value: some other name with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">37 ms</div>
+</em><em class="status">passed</em>shipping-test first_name value: alex</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">37 ms</div>
+</em><em class="status">passed</em>shipping-test first_name value: alex with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">32 ms</div>
+</em><em class="status">passed</em>shipping-test first_name value: ben</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>shipping-test first_name value: ben with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>shipping-test first_name value: andy</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>shipping-test first_name value: andy with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">30 ms</div>
+</em><em class="status">passed</em>shipping-test last_name value: some last name</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">24 ms</div>
+</em><em class="status">passed</em>shipping-test last_name value: some last name with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>shipping-test last_name value: some other last name</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">26 ms</div>
+</em><em class="status">passed</em>shipping-test last_name value: some other last name with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">26 ms</div>
+</em><em class="status">passed</em>shipping-test state value: GA</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">30 ms</div>
+</em><em class="status">passed</em>shipping-test state value: GA with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">26 ms</div>
+</em><em class="status">passed</em>shipping-test state value: georgia</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">24 ms</div>
+</em><em class="status">passed</em>shipping-test state value: georgia with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">44 ms</div>
+</em><em class="status">passed</em>shipping-test state value: Georgia</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">25 ms</div>
+</em><em class="status">passed</em>shipping-test state value: Georgia with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">31 ms</div>
+</em><em class="status">passed</em>shipping-test state value: CA</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>shipping-test state value: CA with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>shipping-test state value: Not a state</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>shipping-test state value: Not a state with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>shipping-test city value: Kennesaw</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>shipping-test city value: Kennesaw with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>shipping-test city value: kennesaw</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">28 ms</div>
+</em><em class="status">passed</em>shipping-test city value: kennesaw with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">24 ms</div>
+</em><em class="status">passed</em>shipping-test city value: Atlanta</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">24 ms</div>
+</em><em class="status">passed</em>shipping-test city value: Atlanta with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">30 ms</div>
+</em><em class="status">passed</em>shipping-test city value: Not a city</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>shipping-test city value: Not a city with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">19 ms</div>
+</em><em class="status">passed</em>shipping-test address value: 1234 some address</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">34 ms</div>
+</em><em class="status">passed</em>shipping-test address value: 1234 some address with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">35 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 12345</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 12345 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">27 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 54321</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">33 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 54321 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">16 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 30043</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">19 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 30043 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">24 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 30004</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">24 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 30004 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">25 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 30152</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">31 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 30152 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">33 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 12345 </span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">26 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 12345  with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 00000</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 00000 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 00001</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 00001 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 01110</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>shipping-test zip value: 01110 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">26 ms</div>
+</em><em class="status">passed</em>billing-test first_name value: some name</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>billing-test first_name value: some name with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">33 ms</div>
+</em><em class="status">passed</em>billing-test first_name value: some other name</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">25 ms</div>
+</em><em class="status">passed</em>billing-test first_name value: some other name with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">28 ms</div>
+</em><em class="status">passed</em>billing-test first_name value: alex</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>billing-test first_name value: alex with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">19 ms</div>
+</em><em class="status">passed</em>billing-test first_name value: ben</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">18 ms</div>
+</em><em class="status">passed</em>billing-test first_name value: ben with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>billing-test first_name value: andy</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>billing-test first_name value: andy with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>billing-test last_name value: some last name</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>billing-test last_name value: some last name with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>billing-test last_name value: some other last name</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">28 ms</div>
+</em><em class="status">passed</em>billing-test last_name value: some other last name with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>billing-test state value: GA</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>billing-test state value: GA with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">25 ms</div>
+</em><em class="status">passed</em>billing-test state value: georgia</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>billing-test state value: georgia with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">19 ms</div>
+</em><em class="status">passed</em>billing-test state value: Georgia</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>billing-test state value: Georgia with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">30 ms</div>
+</em><em class="status">passed</em>billing-test state value: CA</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>billing-test state value: CA with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">28 ms</div>
+</em><em class="status">passed</em>billing-test state value: Not a state</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">27 ms</div>
+</em><em class="status">passed</em>billing-test state value: Not a state with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">19 ms</div>
+</em><em class="status">passed</em>billing-test city value: Kennesaw</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>billing-test city value: Kennesaw with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>billing-test city value: kennesaw</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">16 ms</div>
+</em><em class="status">passed</em>billing-test city value: kennesaw with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>billing-test city value: Atlanta</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">31 ms</div>
+</em><em class="status">passed</em>billing-test city value: Atlanta with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">29 ms</div>
+</em><em class="status">passed</em>billing-test city value: Not a city</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>billing-test city value: Not a city with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>billing-test address value: 1234 some address</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>billing-test address value: 1234 some address with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">32 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 12345</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 12345 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 54321</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 54321 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">24 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 30043</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 30043 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">27 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 30004</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">19 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 30004 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">18 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 30152</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">23 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 30152 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">29 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 12345 </span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">26 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 12345  with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 00000</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 00000 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">18 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 00001</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">16 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 00001 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 01110</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">18 ms</div>
+</em><em class="status">passed</em>billing-test zip value: 01110 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">17 ms</div>
+</em><em class="status">passed</em>billing-test credit_card_number value: 1234123412341234</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">29 ms</div>
+</em><em class="status">passed</em>billing-test credit_card_number value: 1234123412341234 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">22 ms</div>
+</em><em class="status">passed</em>billing-test credit_card_number value: 0000000000000000</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>billing-test credit_card_number value: 0000000000000000 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">32 ms</div>
+</em><em class="status">passed</em>billing-test credit_card_number value: 0000000000000001</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">28 ms</div>
+</em><em class="status">passed</em>billing-test credit_card_number value: 0000000000000001 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">21 ms</div>
+</em><em class="status">passed</em>billing-test credit_card_number value: 1234 1234 1234 1234</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em
+        class="status">passed</em>billing-test credit_card_number value: 1234 1234 1234 1234 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">18 ms</div>
+</em><em class="status">passed</em>billing-test cvv value: 777</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">24 ms</div>
+</em><em class="status">passed</em>billing-test cvv value: 777 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">25 ms</div>
+</em><em class="status">passed</em>billing-test paymentMethod value: CreditCard</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>billing-test paymentMethod value: CreditCard with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">28 ms</div>
+</em><em class="status">passed</em>billing-test expiration value: Wed Jun 01 2016 00:00:00 GMT-0400 (Eastern Daylight Time)</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">26 ms</div>
+</em><em class="status">passed</em>billing-test expiration value: Wed Jun 01 2016 00:00:00 GMT-0400 (Eastern Daylight Time) with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">30 ms</div>
+</em><em class="status">passed</em>billing-test expiration value: Wed Mar 01 2017 00:00:00 GMT-0500 (Eastern Standard Time)</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">19 ms</div>
+</em><em class="status">passed</em>billing-test expiration value: Wed Mar 01 2017 00:00:00 GMT-0500 (Eastern Standard Time) with paypal checkout</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">20 ms</div>
+</em><em class="status">passed</em>billing-test expiration value: Mon Aug 01 2016 00:00:00 GMT-0400 (Eastern Daylight Time)</span>
+                                    </li>
+                                    <li class="level test">
+<span><em class="time">
+    <div class="time">19 ms</div>
+</em><em class="status">passed</em>billing-test expiration value: Mon Aug 01 2016 00:00:00 GMT-0400 (Eastern Daylight Time) with paypal checkout</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="level suite ignored open">
+                                <span><em class="time"></em>test invalid checkouts</span>
+                                <ul>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test first_name value: undefined</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test first_name value: undefined with paypal checkout</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test last_name value: undefined</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test last_name value: undefined with paypal checkout</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test state value: undefined</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test state value: undefined with paypal checkout</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test city value: undefined</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test city value: undefined with paypal checkout</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test address value: undefined</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test address value: undefined with paypal checkout</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test zip value: undefined</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test zip value: undefined with paypal checkout</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em
+                                                class="status">ignored</em>test zip value: 0</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test zip value: 0 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em
+                                                class="status">ignored</em>test zip value: 1</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test zip value: 1 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em
+                                                class="status">ignored</em>test zip value: 12</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test zip value: 12 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em
+                                                class="status">ignored</em>test zip value: 123</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test zip value: 123 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test zip value: 1234</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test zip value: 1234 with paypal checkout</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test zip value: 123456</span>
+                                    </li>
+                                    <li class="level test ignored open">
+                                        <span><em class="time"></em><em class="status">ignored</em>test zip value: 123456 with paypal checkout</span>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </li>
         </ul>
-    </div>
+</div>
 </div>
 <div id="footer">
-    <p>Generated by WebStorm on 4/27/16 1:12 AM</p>
+    <p>Generated by WebStorm on 4/30/16 3:08 PM</p>
 </div>
 </body>
 </html>
