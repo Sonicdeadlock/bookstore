@@ -95,13 +95,13 @@ function checkout(req, res) {
     if (!req.session.cart) {
         res.status(404).send();
     } else if (!isValidLocation(req.body.shippingInformation)) {
-        console.log('Invalid shipping information');
+        res.status(403).send('Invalid shipping information');
     } else if (req.body.billingInformation.paymentMethod === 'CreditCard' && !isValidLocation(req.body.billingInformation)) {
-        console.log('Invalid billing information');
+        res.status(403).send('Invalid billing information');
     } else if (req.body.billingInformation.paymentMethod === 'CreditCard' && !isValidCreditCard(req.body.billingInformation)) {
-        console.log('Invalid Credit Card information');
+        res.status(403).send('Invalid Credit Card information');
     } else if (req.body.billingInformation.paymentMethod === 'Paypal' && req.body.billingInformation.paypalPassword !== '12345678') {
-        console.log('Invalid Paypal login');
+        res.status(403).send('Invalid Paypal login');
     }
     else {
         var cart = req.session.cart;

@@ -1,7 +1,7 @@
 /**
  * Created by Sonicdeadlock on 3/2/2016.
  */
-angular.module('controllers').controller('searchController', function ($scope, $http, $rootScope) {
+angular.module('controllers').controller('searchController', function ($scope, $http, $rootScope, $alert) {
     var searchType = $rootScope.$stateParams.searchType;
     var searchString = $rootScope.$stateParams.searchString;
     $scope.books = [];
@@ -97,6 +97,10 @@ angular.module('controllers').controller('searchController', function ($scope, $
     $scope.add = function (book, order_type) {
         book.purchaseType = order_type;
         $http.post('/api/cart/add', book).success(function () {
+            var alert = $alert({content: 'Book Added to cart', placement: 'top-right', show: true, type: 'info'});
+            setTimeout(function () {
+                alert.destroy();
+            }, 1000 * 2);
             $http.get('/api/cart/count').success(function (data) {
                 $rootScope.cart_count = data;
             })

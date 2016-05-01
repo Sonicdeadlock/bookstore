@@ -12,7 +12,8 @@ function getByTitle(req, res) {
 }
 
 function getByISBN(req, res) {
-    var ISBN = req.body.ISBN;
+    var ISBN = req.body.ISBN || req.params.ISBN;
+
     res.json(datastore.searchISBN(ISBN));
 }
 
