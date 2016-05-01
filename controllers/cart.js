@@ -36,6 +36,7 @@ function add(req, res) {
         var cart = req.session.cart || [];
         req.body.id = uid();
         req.body.quantity = req.body.quantity || 1;
+
         switch (req.body.purchaseType) {
             case 'RENT':
                 req.body.totalPrice = datastore.searchISBN(req.body.ISBN).priceRental * req.body.quantity;
@@ -50,6 +51,12 @@ function add(req, res) {
                 req.body.totalPrice = datastore.searchISBN(req.body.ISBN).priceEBook;
                 break;
         }
+        var existingItem = _.find(cart, {purchaseType: req.body.purchaseType, ISBN: req.body.ISBN});
+        if (existingItem) {
+            existingItem.quantity += req.body.quantity;
+            existingItem.totalPrice += req.body.totalPrice;
+        }
+        else
         cart.push(req.body);
         req.session.cart = cart;
         res.status(200).send();
