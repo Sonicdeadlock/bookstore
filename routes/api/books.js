@@ -12,11 +12,12 @@ router.route('/author')
 router.route('/title')
     .post(bookController.getByTitle);
 
-router.route('/ISBN')
+router.route('/ISBN/:ISBN')
+    .get(bookController.getByISBN)
     .post(bookController.getByISBN);
 
 router.route('/getAll')
-    .post(bookController.getAll);
+    .get(bookController.getAll);
 
 router.route('/keyword')
     .post(bookController.getByKeyword);
