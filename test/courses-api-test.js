@@ -14,20 +14,26 @@ describe('Courses API', function () {
     });
 
     function testPost(request, endpoint, testData, done) {
-        _.forEach(testData.send, function (each) {
+        var requests = [];
+        _.forEach(testData.send, function (each, i) {
+            requests.push(i);
             request
                 .post(endpoint)
                 .send(each.submit)
                 .expect(each.expects.code)
                 .end(function (err, res) {
+                    res.body.should.be.eql(each.expects.response);
                     if (err) {
                         done(err);
                         return;
                     }
-                    res.body.should.be.eql(each.expects.response);
+                    var iOfReq = requests.indexOf(i);
+                    requests.splice(iOfReq, iOfReq + 1);
+                    if (requests.length == 0) {
+                        done();
+                    }
                 });
         });
-        done();
     }
 
     describe('course id search', function () {
