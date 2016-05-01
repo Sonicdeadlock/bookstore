@@ -1,0 +1,5 @@
+.idea/
+*.iml
+public/BookImages/
+bower_components/
+node_modules/
