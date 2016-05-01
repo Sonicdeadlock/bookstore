@@ -119,10 +119,10 @@ describe('The Cart API', function () {
                 .expect(200)
                 .end(function (err, res) {
                     if (err) done(err);
-                    res.body.should.be.equal(1)
+                    res.body.should.be.equal(1);
                     done();
                 })
-        })
+        });
         it('should have one item in the cart', function (done) {
             request.get('/api/cart')
                 .expect(200)
@@ -326,10 +326,10 @@ describe('The Cart API', function () {
                                         var body = res.body;
                                         body = _.map(body, function (obj) {
                                             return _.mapValues(obj, _.toString)
-                                        })
+                                        });
                                         cart = _.map(cart, function (obj) {
                                             return _.mapValues(obj, _.toString)
-                                        })
+                                        });
                                         changedBook = _.mapValues(changedBook, _.toString)
                                         body.should.have.length(2);
                                         body[changeFirst ? 0 : 1].should.eql(changedBook);
@@ -594,7 +594,7 @@ describe('The Cart API', function () {
 
             testValid();
         });
-        describe.skip('test invalid checkouts', function () {
+        describe('test invalid checkouts', function () {
             var invalidOptions = checkoutDataOptions.invalid;
             var validOptions = checkoutDataOptions.valid;
             _.forEach(_.keys(invalidOptions.shippingInformation), function (key) {
@@ -612,7 +612,7 @@ describe('The Cart API', function () {
                     testCheckout(possibilityClone, "test " + key + " value: " + value + " with paypal checkout", 403);
                 });
             });
-        })
+        });
 
 
         //TODO:test checkout with no cart init

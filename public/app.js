@@ -20,6 +20,9 @@ app.run(['$rootScope', '$state', '$stateParams', '$http', function ($rootScope, 
     $rootScope.$stateParams = $stateParams;
     $http.get('/api/cart/count').success(function (data) {
         $rootScope.cart_count = data;
+    });
+    $http.get('/auth/self').success(function (data) {
+        $rootScope.logged_in_user = data;
     })
 }]);
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {

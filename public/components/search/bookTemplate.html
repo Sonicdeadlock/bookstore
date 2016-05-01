@@ -15,7 +15,7 @@
         In stock </b><a ng-if="book.quantityUsed>0||book.quantityUsed==='inf'"
                         ng-click="add(book,'USED')"> Add To
         Cart</a></span><b ng-if="book.quantityUsed<=0" class="text-danger"> Out of Stock</b></p>
-    <p><b>Rent: </b><span ng-class="{strikethrough:book.quantityRental<=0}">${{book.priceRental}}<b
+    <p ng-if="logged_in_user"><b>Rent: </b><span ng-class="{strikethrough:book.quantityRental<=0}">${{book.priceRental}}<b
             ng-if="book.quantityRental>0||book.quantityRental==='inf'"> <span>{{book.quantityRental==='inf'?"":book.quantityRental}}</span>
         In stock </b><a ng-if="book.quantityRental>0||book.quantityRental==='inf'"
                         ng-click="add(book,'RENT')"> Add To

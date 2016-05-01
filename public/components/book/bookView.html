@@ -41,12 +41,14 @@
                 cart
             </button>
         </div>
-        <div class="well col-md-5 purchase-option">
+        <div class="well col-md-5 purchase-option clearfix">
             <p><b>Rent Book</b></p>
             <p>${{book.priceRental}}</p>
             <p ng-if="book.quantityRental>=1">{{book.quantityRental}} left in stock</p>
-            <p ng-if="book.quantityRental<1"><b class="text-danger">Out of Stock</b></p>
-            <button class="btn btn-primary" ng-class="{disabled:book.quantityRental<=0}" ng-click="add('RENT')">Add to
+            <p ng-if="book.quantityRental<1 && logged_in_user"><b class="text-danger">Out of Stock</b></p>
+            <p ng-if="!logged_in_user"><b class="text-danger">Log in to rent a book</b></p>
+            <button class="btn btn-primary" ng-if='logged_in_user' ng-class="{disabled:book.quantityRental<=0}"
+                    ng-click="add('RENT')">Add to
                 cart
             </button>
         </div>

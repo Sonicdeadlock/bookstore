@@ -23,7 +23,7 @@
                         </li>
                         <li ng-class="{disabled:item.quantityEBook<1}"><a ng-click="change_purchase_type(item,'EBOOK')">E-Book</a>
                         </li>
-                        <li ng-class="{disabled:item.book.quanaityRent<1}"><a
+                        <li ng-if='logged_in_user' ng-class="{disabled:item.book.quanaityRent<1}"><a
                                 ng-click="change_purchase_type(item,'RENT')">Rent</a></li>
                     </ul>
             </td>
