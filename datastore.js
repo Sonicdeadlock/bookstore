@@ -89,7 +89,7 @@ module.exports = {
     searchTitleFuzzy: function (titlePart) {
         return _.filter(bookData, function (book) {
             var bookTitle = book.title;
-            return _.lowerCase(bookTitle).indexOf(_.lowerCase(titlePart)) != -1;
+            return bookTitle.toLowerCase().indexOf(titlePart.toLowerCase()) != -1;
         });
     },
     searchTitle: function (title) {
@@ -100,19 +100,19 @@ module.exports = {
     searchAuthorFuzzy: function (authorPart) {
         return _.filter(bookData, function (book) {
             var bookAuthor = book.author;
-            return _.lowerCase(bookAuthor).indexOf(_.lowerCase(authorPart)) != -1;
+            return bookAuthor.toLowerCase().indexOf(authorPart.toLowerCase()) != -1;
         });
     },
     searchCourseFuzzy: function (coursePart) {
         return _.filter(bookData, function (book) {
             var course = book.course;
-            return _.lowerCase(course).indexOf(_.lowerCase(coursePart)) != -1;
+            return course.toLowerCase().indexOf(coursePart.toLowerCase()) != -1;
         });
     },
     searchProfessorFuzzy: function (professorPart) {
         return _.filter(bookData, function (book) {
             var professor = book.professor;
-            return _.lowerCase(professor).indexOf(_.lowerCase(professorPart)) != -1;
+            return professor.toLowerCase().indexOf(professorPart.toLowerCase()) != -1;
         });
     },
     searchAuthor: function (author) {

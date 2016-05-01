@@ -6,19 +6,19 @@ var router = express.Router();
 var bookController = require('../../controllers/book');
 
 
-router.route('/author/:author')
-    .get(bookController.getByAuthor);
+router.route('/author')
+    .post(bookController.getByAuthor);
 
-router.route('/title/:title')
-    .get(bookController.getByTitle);
+router.route('/title')
+    .post(bookController.getByTitle);
 
-router.route('/ISBN/:ISBN')
-    .get(bookController.getByISBN);
+router.route('/ISBN')
+    .post(bookController.getByISBN);
 
 router.route('/getAll')
-    .get(bookController.getAll);
+    .post(bookController.getAll);
 
-router.route('/keyword/:keywords')
-    .get(bookController.getByKeyword);
+router.route('/keyword')
+    .post(bookController.getByKeyword);
 
 module.exports = router;

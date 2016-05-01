@@ -32,25 +32,25 @@ angular.module('controllers').controller('searchController', function ($scope, $
     };
     switch (searchType) {
         case 'Title':
-            $http.get('/api/books/title/' + searchString)
+            $http.post('/api/books/title/', {title: searchString})
                 .success(function (data) {
                     $scope.books = data;
                 });
             break;
         case 'Author':
-            $http.get('/api/books/author/' + searchString)
+            $http.post('/api/books/author/', {author: searchString})
                 .success(function (data) {
                     $scope.books = data;
                 });
             break;
         case 'ISBN':
-            $http.get('/api/books/ISBN/' + searchString)
+            $http.post('/api/books/ISBN/', {ISBN: searchString})
                 .success(function (data) {
                     $scope.books = data;
                 });
             break;
         case 'Course':
-            $http.get('/api/courses/get_books/' + searchString)
+            $http.post('/api/courses/get_books/', {course: searchString})
                 .success(function (data) {
                     $scope.course_sections = _.map(data, function (course) {
                         return {
@@ -64,7 +64,7 @@ angular.module('controllers').controller('searchController', function ($scope, $
                 });
             break;
         case 'Professor':
-            $http.get('/api/professors/get_books/' + searchString)
+            $http.post('/api/professors/get_books/', {professor: searchString})
                 .success(function (data) {
                     $scope.course_sections = _.map(data, function (course) {
                         return {
@@ -78,7 +78,7 @@ angular.module('controllers').controller('searchController', function ($scope, $
                 });
             break;
         case 'Keyword':
-            $http.get('/api/books/keyword/' + searchString)
+            $http.post('/api/books/keyword/', {keywords: searchString})
                 .success(function (data) {
                     $scope.books = data.books;
                     $scope.course_sections = _.map(data.course_sections, function (course) {

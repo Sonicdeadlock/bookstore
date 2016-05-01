@@ -8,10 +8,10 @@ var courseController = require('../../controllers/course');
 router.route('/')
     .get(courseController.get);
 
-router.route('/get_books/:course')
-    .get(courseController.get_books);
+router.route('/get_books')
+    .post(courseController.get_books);
 
-router.route('/id/:CRN')
-    .get(courseController.getById);
+router.route('/id')
+    .post(courseController.getById);
 
 module.exports = router;

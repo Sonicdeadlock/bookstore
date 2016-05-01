@@ -10,13 +10,13 @@ function get(req, res) {
 }
 
 function getById(req, res) {
-    var CRN = req.params.CRN;
+    var CRN = req.body.CRN;
     res.json(datastore.searchCRN(CRN));
 
 }
 
 function get_books(req, res) {
-    var course = req.params.course;
+    var course = req.body.course;
     res.json(datastore.courseFormat(datastore.searchCourseFuzzy(course)));
 }
 

@@ -6,18 +6,18 @@ var _ = require('lodash');
 
 
 function getByTitle(req, res) {
-    var title = req.params.title;
+    var title = req.body.title;
     res.json(datastore.searchTitleFuzzy(title));
 
 }
 
 function getByISBN(req, res) {
-    var ISBN = req.params.ISBN;
+    var ISBN = req.body.ISBN;
     res.json(datastore.searchISBN(ISBN));
 }
 
 function getByAuthor(req, res) {
-    var author = req.params.author;
+    var author = req.body.author;
     res.json(datastore.searchAuthorFuzzy(author));
 }
 
@@ -26,7 +26,7 @@ function getAll(req, res) {
 }
 
 function getByKeyword(req, res) {
-    var words = req.params.keywords.split(' ');
+    var words = req.body.keywords.split(' ');
     var course_sections = [];
     var books = [];
     words.forEach(function (word) {
