@@ -8,8 +8,8 @@ var professorController = require('../../controllers/professor');
 router.route('/')
     .get(professorController.get);
 
-router.route('/get_books/:professor')
-    .get(professorController.get_books);
+router.route('/get_books')
+    .post(professorController.get_books);
 
 
 module.exports = router;
