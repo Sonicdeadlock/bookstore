@@ -1,5 +1,6 @@
 /**
  * Created by Sonicdeadlock on 3/1/2016.
+ * Authors: Sonicdeadlock, Muhatashim
  */
 var datastore = require('../datastore');
 var _ = require('lodash');

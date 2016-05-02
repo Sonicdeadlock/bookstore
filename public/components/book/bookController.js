@@ -1,5 +1,6 @@
 /**
  * Created by Sonicdeadlock on 3/2/2016.
+ * Authors: Sonicdeadlock, Muhatashim
  */
 angular.module('controllers').controller('bookController', function ($scope, $http, $rootScope, $alert) {
     var bookId = $rootScope.$stateParams.bookId;
