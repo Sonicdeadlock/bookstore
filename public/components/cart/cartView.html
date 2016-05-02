@@ -43,7 +43,7 @@
     </table>
     <div class="pull-right">
         <p class=""><b>Total: </b>${{getTotal()|number:2}}</p>
-        <button class="btn btn-primary" ui-sref="checkout">Checkout</button>
+        <button class="btn btn-primary" ui-sref="checkout" ng-show='cart_items && cart_items.length>0'>Checkout</button>
     </div>
 
 </div>

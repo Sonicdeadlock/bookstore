@@ -23,23 +23,35 @@ angular.module('controllers').controller('checkoutController', function ($scope,
     };
 
     $scope.checkout = function () {
-        $http.post('api/cart/checkout', {
-                billingInformation: $scope.billingInformation,
-                shippingInformation: $scope.shippingInformation
-            })
-            .success(function (data) {
-                $scope.receipt = data;
-                _.forEach(alerts, function (alert) {
+        $http.get('/api/cart').success(function (data) {
+            if (data && data != [])
+                $http.post('api/cart/checkout', {
+                        billingInformation: $scope.billingInformation,
+                        shippingInformation: $scope.shippingInformation
+                    })
+                    .success(function (data) {
+                        $scope.receipt = data;
+                        _.forEach(alerts, function (alert) {
+                            alert.destroy();
+                        });
+                        alerts = [];
+                    }).error(function (errors) {
+                    var alert = $alert({content: errors, placement: 'top', show: true, type: 'danger'});
+                    alerts.push(alert);
+                    setTimeout(function () {
                     alert.destroy();
+                    }, 1000 * 6)
                 });
-                alerts = [];
-            }).error(function (errors) {
-            var alert = $alert({content: errors, placement: 'top', show: true, type: 'danger'});
-            alerts.push(alert);
-            setTimeout(function () {
-                alert.destroy();
-            }, 1000 * 6)
-        })
+            else {
+                var alert = $alert({content: 'No Items in cart', placement: 'top', show: true, type: 'danger'});
+                alerts.push(alert);
+                setTimeout(function () {
+                    alert.destroy();
+                }, 1000 * 6)
+            }
+
+        });
+
     }
 
 }).filter('last4', function () {
