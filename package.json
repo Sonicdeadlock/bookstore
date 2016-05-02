@@ -14,7 +14,7 @@
   "keywords": [
     "bookstore"
   ],
-  "author": "Alex Thomas",
+  "author": ["Alex Thomas", "Muhatashim Zarif"],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Sonicdeadlock/bookstore/issues"
