@@ -5,6 +5,7 @@ var datastore = require('../datastore');
 var _ = require('lodash');
 var uid = require('uid');
 var fs = require('fs');
+var config = require('../config');
 
 function add(req, res) {
     if (
@@ -176,6 +177,33 @@ function checkout(req, res) {
         };
         req.session.cart = [];
         //todo:store receipt
+        fs.existsSync("./orders") || fs.mkdirSync("./orders");
+        var orderData = 'Shipping Information \n';
+        var header = 'Order Time' + config.datastore.seperator, info = '' + (new Date()) + config.datastore.seperator;
+        _.forEach(receipt.shipping, function (value, key) {
+            header += key + config.datastore.seperator;
+            info += value + config.datastore.seperator;
+        });
+        orderData += header + '\n';
+        orderData += info + '\n';
+        orderData += '\n\n';
+        orderData += 'Items\n';
+        var keys = ['ISBN', 'purchaseType', 'quantity'];
+        _.forEach(keys, function (key) {
+            orderData += key + config.datastore.seperator;
+        });
+        orderData += '\n';
+        _.forEach(receipt.items, function (item) {
+            _.forEach(keys, function (key) {
+                orderData += item[key] + config.datastore.seperator;
+            });
+            orderData += '\n';
+        });
+        var date = new Date();
+        var day = date.getDate();
+        var month = date.getMonth();
+        var year = date.getFullYear();
+        fs.writeFile('./orders/' + day + '-' + month + '-' + year + '--' + uid(8) + '.tsv', orderData);
         res.json(receipt);
 
     }
